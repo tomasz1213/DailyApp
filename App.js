@@ -2,19 +2,22 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {createStore, combineReducers} from 'redux';
 import {weatherReducer} from './src/store/reducer/weather';
+import {waterReducer} from './src/store/reducer/water';
+import {userReducer} from './src/store/reducer/user';
 import {DataInit} from './src/utility/datInit';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 import {Weather} from './src/widgets/weather';
 import {Water} from './src/widgets/water';
 
 const rootReducer = combineReducers({
+  water: waterReducer,
+  user: userReducer,
   weather: weatherReducer,
 });
 

@@ -112,6 +112,7 @@ const BottomGlass = styled.View`
 
 const Container = styled.View`
   width: 100px;
+  height: 124px;
   margin-left: 20px;
   flex-direction: row;
 `;
