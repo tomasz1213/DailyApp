@@ -11,11 +11,11 @@ import Sunset from '../assets/icons/sunset.png';
 import Umbrella from '../assets/icons/umbrella.png';
 const defaultSize = Dimensions.get('window').height / 40 - 2;
 
-export const Weather = () => {
+export const Weather = ({navigation}) => {
   const {daily_chance_of_rain, name, sunrise, sunset, temp_c, temp_f} =
     useSelector(WEATHER_SELECTORS.getWeatherData);
   return (
-    <Container>
+    <TouchableOpacity onPress={() => navigation.navigate('Weather')}>
       <Text style={styles.textTemp}>
         {temp_c}
         {'\u00b0'}C
@@ -62,11 +62,11 @@ export const Weather = () => {
           </Text>
         </LinearGradient>
       </View>
-    </Container>
+    </TouchableOpacity>
   );
 };
 
-const Container = styled.View`
+const TouchableOpacity = styled.TouchableOpacity`
   width: 100%;
   height: 23%;
 `;
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   text: {
     position: 'absolute',
     color: '#ffffff',
-    fontSize: defaultSize - 2,
+    fontSize: defaultSize - 4,
     marginLeft: 4,
     top: '57%',
     fontFamily: fonts.ibm_bold,
@@ -111,11 +111,12 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '23%',
+    marginVertical: '5%',
   },
   icons: {
     margin: defaultSize - 5,
-    height: defaultSize + 15,
-    width: defaultSize + 15,
+    height: defaultSize + 20,
+    width: defaultSize + 20,
   },
   last: {
     position: 'absolute',

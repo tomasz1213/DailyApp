@@ -29,9 +29,10 @@ export const Todo = ({navigation}) => {
           <Text style={styles.todoText}>- Please add task</Text>
         )}
         <TouchableOpacity
-          style={{...styles.done, ...buttonColor}}
-          onPress={() => handleTaskDone()}
-        />
+          style={{...styles.doneTouch}}
+          onPress={() => handleTaskDone()}>
+          <View style={{...styles.done, ...buttonColor}} />
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -41,21 +42,30 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     width: '90%',
-    height: 70,
+    height: '10%',
     marginVertical: '5%',
     marginHorizontal: '5%',
   },
   todoText: {
+    height: 30,
     color: 'white',
     fontFamily: fonts.ibm_regular,
     fontSize: 20,
   },
   done: {
     position: 'absolute',
-    marginTop: 10,
-    right: 20,
-    width: 15,
-    height: 15,
+    right: 5,
+    top: 20,
+    width: 20,
+    height: 20,
+    borderRadius: 20,
+  },
+  doneTouch: {
+    position: 'absolute',
+    right: 0,
+    top: -10,
+    width: 50,
+    height: 50,
     borderRadius: 20,
   },
 });

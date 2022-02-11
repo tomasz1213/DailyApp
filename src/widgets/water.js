@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   container: {
-    marginVertical: '7%',
+    marginVertical: '10%',
     width: '100%',
-    height: 100,
+    height: '12%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
