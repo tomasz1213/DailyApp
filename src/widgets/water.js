@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect, useLayoutEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -10,7 +10,7 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {WATER_SELECTORS} from '../store/selectors/water';
 import {USER_SELECTORS} from '../store/selectors/user';
-import {setWaterData} from '../store/reducer/water';
+import {setWaterData, clearWaterData} from '../store/reducer/water';
 import Glass from '../assets/icons/glasss.png';
 import {fonts} from '../utility/fonts';
 import {colors} from '../utility/colors';
@@ -22,13 +22,26 @@ export const Water = () => {
   const {needDrink} = useSelector(USER_SELECTORS.getUserData);
   const dispatch = useDispatch();
   const [bottlePercent, setBottlePercent] = useState(0);
-  const bottlePercentHeight = useRef(new Animated.Value(80)).current;
+  let bottlePercentHeight = useRef(new Animated.Value(70)).current;
+  const waterAllReadyDrunk = +waterDrink + +glassSize;
+  const calculatePercentage = (waterAllReadyDrunk / needDrink) * 100;
+
+  console.log(waterDrink);
+  // dispatch(clearWaterData())
+  useEffect(() => {
+    setBottlePercent(waterDrink >= 250 ? calculatePercentage.toFixed(0) : 0);
+  }, []);
+
+  useEffect(() => {
+    Animated.timing(bottlePercentHeight, {
+      toValue: -bottlePercent + 70,
+      useNativeDriver: true,
+    }).start();
+  });
 
   const handleGlassClick = () => {
     if (bottlePercent >= 110) return;
-    const waterDrinks = +waterDrink + +glassSize;
-    const calculatePercentage = (waterDrinks / needDrink) * 100;
-    dispatch(setWaterData({waterDrink: waterDrinks}));
+    dispatch(setWaterData({waterDrink: waterAllReadyDrunk}));
     setBottlePercent(calculatePercentage.toFixed(0));
     Animated.timing(bottlePercentHeight, {
       toValue: -bottlePercent + 70,
