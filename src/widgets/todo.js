@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '90%',
     height: '10%',
-    marginVertical: '5%',
+    marginVertical: '3%',
     marginHorizontal: '5%',
   },
   todoText: {

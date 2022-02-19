@@ -4,14 +4,14 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import {Weather} from '../widgets/weather';
 import {Water} from '../widgets/water';
 import {Todo} from '../widgets/todo';
+import {Steps} from '../widgets/steps';
+import {Sleep} from '../widgets/sleep';
 
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from '../store/reducer/root';
 
 import {DataInit} from '../utility/datInit';
-import {Steps} from '../widgets/steps';
-import {Sleep} from '../widgets/sleep';
 
 export const Home = props => {
   return (
@@ -19,7 +19,7 @@ export const Home = props => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <SafeAreaView style={styles.container}>
-            <DataInit />
+            <DataInit {...props} />
             <Weather {...props} />
             <Water {...props} />
             <Todo {...props} />
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   container: {
+    paddingTop: '5%',
     flex: 1,
     height: '100%',
     color: '#fff',

@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     width: '90%',
-    marginVertical: '5%',
+    marginVertical: '3%',
   },
   chart: {
     margin: 0,

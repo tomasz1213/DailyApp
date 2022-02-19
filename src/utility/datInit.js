@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Fitness from '@ovalmoney/react-native-fitness';
 
@@ -10,7 +10,7 @@ import {
   setCaloriesData,
   setDistanceData,
 } from '../store/reducer/fitness';
-import {setLastReset, clearWaterData } from '../store/reducer/water';
+import {setLastReset, clearWaterData} from '../store/reducer/water';
 import {WATER_SELECTORS} from '../store/selectors/water';
 
 import {fetchData} from '../utility/api';
@@ -19,14 +19,14 @@ import {permissions, requestPermission} from './permissions';
 // import {Buffer} from 'buffer';
 // import LiveAudioStream from 'react-native-live-audio-stream';
 
-export const DataInit = () => {
+export const DataInit = ({navigation}) => {
   const lastReset = useSelector(WATER_SELECTORS.getLastReset);
   const dispatch = useDispatch();
 
-  if(!lastReset){
+  if (!lastReset) {
     dispatch(setLastReset(new Date().getDate()));
   }
-  if(lastReset < new Date().getDate()){
+  if (lastReset < new Date().getDate()) {
     dispatch(clearWaterData());
   }
 
@@ -75,8 +75,31 @@ export const DataInit = () => {
       });
   });
 
-  return <View></View>;
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={() => navigation.navigate('Config')}>
+        <Text style={styles.text}>...</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    right: '-5%',
+    transform: [{rotate: '90deg'}],
+    height: '14%',
+    width: '14%',
+    zIndex: 2,
+  },
+  text: {
+    paddingTop: '80%',
+    paddingLeft: '20%',
+    color: 'white',
+    fontSize: 40,
+  },
+});
 
 // TODO --- SLEEP analytics values like [220-225, 0-10] ---> sound of silience
 // useEffect(() => {

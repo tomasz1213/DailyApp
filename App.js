@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <StatusBar translucent={true} hidden={true} />
+      <StatusBar translucent={true} hidden={false} />
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
