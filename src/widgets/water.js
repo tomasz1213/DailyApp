@@ -24,7 +24,6 @@ export const Water = () => {
   let bottlePercentHeight = useRef(new Animated.Value(70)).current;
   const calculatePercentage = (waterDrink / needDrink) * 100;
 
-  console.log(waterDrink);
   useEffect(() => {
     setBottlePercent(calculatePercentage.toFixed(0));
   });

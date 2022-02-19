@@ -1,25 +1,25 @@
-import React, {useEffect} from 'react';
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import Fitness from '@ovalmoney/react-native-fitness';
 
-import {setData} from '../store/reducer/weather';
+import { setData } from '../store/reducer/weather';
 import {
   setSleepData,
   setStepsData,
   setCaloriesData,
   setDistanceData,
 } from '../store/reducer/fitness';
-import {setLastReset, clearWaterData} from '../store/reducer/water';
-import {WATER_SELECTORS} from '../store/selectors/water';
+import { setLastReset, clearWaterData } from '../store/reducer/water';
+import { WATER_SELECTORS } from '../store/selectors/water';
 
-import {fetchData} from '../utility/api';
-import {permissions, requestPermission} from './permissions';
+import { fetchData } from '../utility/api';
+import { permissions, requestPermission } from './permissions';
 
 // import {Buffer} from 'buffer';
 // import LiveAudioStream from 'react-native-live-audio-stream';
 
-export const DataInit = ({navigation}) => {
+export const DataInit = ({ navigation }) => {
   const lastReset = useSelector(WATER_SELECTORS.getLastReset);
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ export const DataInit = ({navigation}) => {
   useEffect(() => {
     fetchData(
       'http://api.weatherapi.com/v1/forecast.json?key=80b78e07cdd74bd89df193721222701&q=Ptaszkowa&days=1&aqi=yes&alerts=yes',
-    ).then(({data}) => dispatch(setData(data)));
+    ).then(({ data }) => dispatch(setData(data)));
   });
 
   useEffect(() => {
@@ -88,14 +88,14 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     right: '-5%',
-    transform: [{rotate: '90deg'}],
+    transform: [{ rotate: '90deg' }],
     height: '14%',
     width: '14%',
     zIndex: 2,
   },
   text: {
     paddingTop: '80%',
-    paddingLeft: '20%',
+    paddingLeft: '13%',
     color: 'white',
     fontSize: 40,
   },

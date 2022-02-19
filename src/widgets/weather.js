@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {View, StyleSheet, Text, Image, Dimensions} from 'react-native';
-import {useSelector} from 'react-redux';
+import { View, StyleSheet, Text, Image, Dimensions } from 'react-native';
+import { useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
-import {WEATHER_SELECTORS} from '../store/selectors/weather';
-import {fonts} from '../utility/fonts';
-import {colors} from '../utility/colors';
+import { WEATHER_SELECTORS } from '../store/selectors/weather';
+import { fonts } from '../utility/fonts';
+import { colors } from '../utility/colors';
 import Sunrise from '../assets/icons/sunrise.png';
 import Sunset from '../assets/icons/sunset.png';
 import Umbrella from '../assets/icons/umbrella.png';
 const defaultSize = Dimensions.get('window').height / 40 - 2;
 
-export const Weather = ({navigation}) => {
-  const {daily_chance_of_rain, name, sunrise, sunset, temp_c, temp_f} =
+export const Weather = ({ navigation }) => {
+  const { daily_chance_of_rain, name, sunrise, sunset, temp_c, temp_f } =
     useSelector(WEATHER_SELECTORS.getWeatherData);
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Weather')}>
@@ -23,13 +23,13 @@ export const Weather = ({navigation}) => {
       <View style={styles.weatherbox}>
         <LinearGradient
           colors={[colors.black, '#241d3b', colors.blue.cold]}
-          style={{...styles.linearGradient, ...styles.linearGradientLeft}}
+          style={{ ...styles.linearGradient, ...styles.linearGradientLeft }}
           locations={[0.1, 0.4, 0.7]}
           useAngle={true}
           angle={65}
-          angleCenter={{x: 0.6, y: 0.5}}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}>
+          angleCenter={{ x: 0.6, y: 0.5 }}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}>
           <Image
             style={styles.icons}
             source={Sunrise}
@@ -39,25 +39,25 @@ export const Weather = ({navigation}) => {
         </LinearGradient>
         <LinearGradient
           colors={[colors.black, '#241d3b', colors.blue.cold]}
-          style={{...styles.linearGradient, ...styles.linearGradientRight}}
+          style={{ ...styles.linearGradient, ...styles.linearGradientRight }}
           locations={[0.1, 0.4, 0.7]}
           useAngle={true}
           angle={250}
-          angleCenter={{x: 0.5, y: 0.6}}
-          start={{x: 1, y: 0}}
-          end={{x: 0, y: 0}}>
+          angleCenter={{ x: 0.5, y: 0.6 }}
+          start={{ x: 1, y: 0 }}
+          end={{ x: 0, y: 0 }}>
           <Image
-            style={{...styles.last, ...styles.icons}}
+            style={{ ...styles.last, ...styles.icons }}
             source={Sunset}
             tintColor={colors.purple.light}
           />
-          <Text style={{...styles.lastText, ...styles.text}}>{sunset}</Text>
+          <Text style={{ ...styles.lastText, ...styles.text }}>{sunset}</Text>
           <Image
-            style={{...styles.umbrella, ...styles.icons}}
+            style={{ ...styles.umbrella, ...styles.icons }}
             source={Umbrella}
             tintColor={colors.purple.light}
           />
-          <Text style={{...styles.umbrellaText, ...styles.text}}>
+          <Text style={{ ...styles.umbrellaText, ...styles.text }}>
             {daily_chance_of_rain}%
           </Text>
         </LinearGradient>

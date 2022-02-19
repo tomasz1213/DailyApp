@@ -1,17 +1,17 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
-import {Weather} from '../widgets/weather';
-import {Water} from '../widgets/water';
-import {Todo} from '../widgets/todo';
-import {Steps} from '../widgets/steps';
-import {Sleep} from '../widgets/sleep';
+import { Weather } from '../widgets/weather';
+import { Water } from '../widgets/water';
+import { Todo } from '../widgets/todo';
+import { Steps } from '../widgets/steps';
+import { Sleep } from '../widgets/sleep';
 
-import {Provider} from 'react-redux';
-import {PersistGate} from 'redux-persist/integration/react';
-import {persistor, store} from '../store/reducer/root';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from '../store/reducer/root';
 
-import {DataInit} from '../utility/datInit';
+import { DataInit } from '../utility/datInit';
 
 export const Home = props => {
   return (
