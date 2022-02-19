@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -10,12 +10,11 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {WATER_SELECTORS} from '../store/selectors/water';
 import {USER_SELECTORS} from '../store/selectors/user';
-import {setWaterData, clearWaterData} from '../store/reducer/water';
+import {setWaterData} from '../store/reducer/water';
 import Glass from '../assets/icons/glasss.png';
 import {fonts} from '../utility/fonts';
 import {colors} from '../utility/colors';
 import Bottle from '../assets/icons/human.png';
-// let bottlePercentHeight = 80;
 
 export const Water = () => {
   const {glassSize, waterDrink} = useSelector(WATER_SELECTORS.getWaterData);
@@ -23,14 +22,12 @@ export const Water = () => {
   const dispatch = useDispatch();
   const [bottlePercent, setBottlePercent] = useState(0);
   let bottlePercentHeight = useRef(new Animated.Value(70)).current;
-  const waterAllReadyDrunk = +waterDrink + +glassSize;
-  const calculatePercentage = (waterAllReadyDrunk / needDrink) * 100;
+  const calculatePercentage = (waterDrink / needDrink) * 100;
 
   console.log(waterDrink);
-  // dispatch(clearWaterData())
   useEffect(() => {
-    setBottlePercent(waterDrink >= 250 ? calculatePercentage.toFixed(0) : 0);
-  }, []);
+    setBottlePercent(calculatePercentage.toFixed(0));
+  });
 
   useEffect(() => {
     Animated.timing(bottlePercentHeight, {
@@ -40,6 +37,8 @@ export const Water = () => {
   });
 
   const handleGlassClick = () => {
+    const waterAllReadyDrunk = waterDrink + glassSize;
+
     if (bottlePercent >= 110) return;
     dispatch(setWaterData({waterDrink: waterAllReadyDrunk}));
     setBottlePercent(calculatePercentage.toFixed(0));
@@ -47,7 +46,6 @@ export const Water = () => {
       toValue: -bottlePercent + 70,
       useNativeDriver: true,
     }).start();
-    // bottlePercentHeight.current = -bottlePercent + 70;
   };
   return (
     <View style={styles.container}>

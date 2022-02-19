@@ -1,11 +1,8 @@
 import React, {useEffect} from 'react';
 import {View} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch, useSelector} from 'react-redux';
 import Fitness from '@ovalmoney/react-native-fitness';
-import {Buffer} from 'buffer';
-import LiveAudioStream from 'react-native-live-audio-stream';
-import {fetchData} from '../utility/api';
-import {useDispatch} from 'react-redux';
+
 import {setData} from '../store/reducer/weather';
 import {
   setSleepData,
@@ -13,10 +10,25 @@ import {
   setCaloriesData,
   setDistanceData,
 } from '../store/reducer/fitness';
+import {setLastReset, clearWaterData } from '../store/reducer/water';
+import {WATER_SELECTORS} from '../store/selectors/water';
+
+import {fetchData} from '../utility/api';
 import {permissions, requestPermission} from './permissions';
 
+// import {Buffer} from 'buffer';
+// import LiveAudioStream from 'react-native-live-audio-stream';
+
 export const DataInit = () => {
+  const lastReset = useSelector(WATER_SELECTORS.getLastReset);
   const dispatch = useDispatch();
+
+  if(!lastReset){
+    dispatch(setLastReset(new Date().getDate()));
+  }
+  if(lastReset < new Date().getDate()){
+    dispatch(clearWaterData());
+  }
 
   useEffect(() => {
     fetchData(
