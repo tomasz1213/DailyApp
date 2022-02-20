@@ -28,6 +28,7 @@ export const DataInit = ({ navigation }) => {
   }
   if (lastReset < new Date().getDate()) {
     dispatch(clearWaterData());
+    dispatch(setLastReset(new Date().getDate()));
   }
 
   useEffect(() => {

@@ -1,23 +1,25 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {fonts} from '../utility/fonts';
-import {colors} from '../utility/colors';
-import {useSelector, useDispatch} from 'react-redux';
-import {setTodoDone} from '../store/reducer/todo';
-import {TODO_SELECTORS} from '../store/selectors/todo';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-export const Todo = ({navigation}) => {
-  const {todo} = useSelector(TODO_SELECTORS.getToDo);
+import { useSelector, useDispatch } from 'react-redux';
+import { setTodoDone } from '../store/reducer/todo';
+import { TODO_SELECTORS } from '../store/selectors/todo';
+
+import { fonts } from '../utility/fonts';
+import { colors } from '../utility/colors';
+
+export const Todo = ({ navigation }) => {
+  const { todo } = useSelector(TODO_SELECTORS.getToDo);
   const dispatch = useDispatch();
   const [buttonColor, setButtonColor] = useState({
     backgroundColor: colors.purple.light,
   });
 
   const handleTaskDone = () => {
-    setButtonColor({backgroundColor: colors.purple.purple});
+    setButtonColor({ backgroundColor: colors.purple.purple });
     setTimeout(() => {
       dispatch(setTodoDone(todo?.ready[0]));
-      setButtonColor({backgroundColor: colors.purple.light});
+      setButtonColor({ backgroundColor: colors.purple.light });
     }, 1000);
   };
   return (
@@ -29,9 +31,9 @@ export const Todo = ({navigation}) => {
           <Text style={styles.todoText}>- Please add task</Text>
         )}
         <TouchableOpacity
-          style={{...styles.doneTouch}}
+          style={{ ...styles.doneTouch }}
           onPress={() => handleTaskDone()}>
-          <View style={{...styles.done, ...buttonColor}} />
+          <View style={{ ...styles.done, ...buttonColor }} />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

@@ -11,9 +11,11 @@ import React, { useState, useEffect } from 'react';
 import { fonts } from '../../utility/fonts';
 import { colors } from '../../utility/colors';
 import settingIcon from '../../assets/icons/settings.png';
+import circleIcon from '../../assets/icons/circle.png';
 
 export const TitledItem = ({ title, desc, onClick, icon }) => {
   const [iconData, setIconData] = useState();
+  const [buttonColor, setButtonColor] = useState(colors.purple.light);
 
   useEffect(() => {
     switch (icon) {
@@ -21,20 +23,37 @@ export const TitledItem = ({ title, desc, onClick, icon }) => {
         setIconData(settingIcon);
         break;
       }
+      case 'circle': {
+        setIconData(circleIcon);
+        break;
+      }
       default: {
-        setIconData(' ');
+        setIconData();
       }
     }
-  },[]);
+  }, []);
+
+  const handleClick = () => {
+    setButtonColor(colors.purple.purple);
+    setTimeout(() => {
+      onClick();
+      setButtonColor(colors.purple.light);
+    }, 500);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.leftSide}>
         <Text style={{ ...styles.text, ...styles.header }}>{title}</Text>
         <Text style={{ ...styles.text, ...styles.body }}>{desc}</Text>
       </View>
-      <View style={styles.buttonContainer}>
-        <Image source={settingIcon} tintColor='white' />
-      </View>
+      <TouchableOpacity onPress={handleClick} style={styles.buttonContainer}>
+        <Image
+          source={iconData}
+          style={styles.icon}
+          tintColor={buttonColor}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -63,8 +82,9 @@ const styles = StyleSheet.create({
     width: '85%',
   },
   buttonContainer: {
-    height: '100%',
     width: '15%',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   header: {
     fontSize: 16,
@@ -74,5 +94,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 12,
     fontFamily: fonts.ibm_regular,
+  },
+  icon: {
+    marginTop: '-20%',
+    width: '45%',
+    height: '40%',
   },
 });

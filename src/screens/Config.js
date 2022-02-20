@@ -3,11 +3,17 @@ import React from 'react';
 
 import { BackButton } from '../components/atoms/BackButton';
 import { TitledItem } from '../components/organism/titled-item';
+import { TextInputModal } from '../components/atoms/TextInput';
 
 import { fonts } from '../utility/fonts';
 import { colors } from '../utility/colors';
 
 export const ConfigScreen = ({ navigation }) => {
+
+  const showInput = () => {
+    console.log('here');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -15,15 +21,18 @@ export const ConfigScreen = ({ navigation }) => {
         <Text style={styles.text}>Configuration</Text>
       </View>
       <View>
+        <TextInputModal />
         <ScrollView style={styles.items}>
           <TitledItem
+            onClick={showInput}
             title="Location Settings"
             desc="Show input and type location for weather information"
-            settings='settings'
+            icon='settings'
           />
           <TitledItem
             title="Location Settings"
             desc="Show input and type location for weather information"
+            icon='circle'
           />
         </ScrollView>
       </View>
