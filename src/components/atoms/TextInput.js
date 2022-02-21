@@ -11,14 +11,23 @@ import React from 'react';
 import { colors } from '../../utility/colors';
 import { fonts } from '../../utility/fonts';
 
-export const TextInputModal = ({onClickAccept, onClickCancel}) => {
+export const TextInputModal = ({
+  onClickAccept,
+  onClickCancel,
+  handleInputChange,
+  inputValue,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
-        <TextInput style={styles.textInput} />
+        <TextInput
+          onChangeText={handleInputChange}
+          style={styles.textInput}
+          value={inputValue}
+        />
         <View style={styles.buttonWrapper}>
           <TouchableOpacity onPress={onClickCancel} color={colors.black}>
-            <Text style={{...styles.button, color:'white'}}>Cancel</Text>
+            <Text style={{ ...styles.button, color: 'white' }}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={onClickAccept} color={colors.black}>
             <Text style={styles.button}>Accept</Text>

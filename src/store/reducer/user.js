@@ -1,14 +1,16 @@
 import {createAction, createReducer} from '@reduxjs/toolkit';
 
 export const setUserData = createAction('SET_USER_DATA');
-export const setUserPosition = createAction('SET_USER_POSITION');
+export const setUserLocation = createAction('SET_USER_LOCATION');
+export const setUserGpsLocation = createAction('SET_USER_GPS_LOCATION');
 export const clearUserData = createAction('CLEAR_USER_DATA');
 
 const initialState = {
   data: {
     weight: 75,
     needDrink: 2250,
-    position: '',
+    location: '',
+    gpsLocation: false,
   },
 };
 
@@ -16,12 +18,15 @@ export const userReducer = createReducer(initialState, builder => {
   builder
     .addCase(setUserData, (state, action) => {
       state.data = {
-        weight: action?.payload?.weight || 75,
-        needDrink: action?.payload?.needDrink || 2250,
+        weight: action?.payload?.weight,
+        needDrink: action?.payload?.needDrink,
       };
     })
-    .addCase(setUserPosition, (state, action) => {
-      state.data.position = action?.payload || '';
+    .addCase(setUserLocation, (state, action) => {
+      state.data.location = action?.payload;
+    })
+    .addCase(setUserGpsLocation, (state, action) => {
+      state.data.gpsLocation = action?.payload;
     })
     .addCase(clearUserData, () => initialState);
 });

@@ -1,7 +1,7 @@
 const getUserData = state => state?.user?.data;
-const getUserPosition = state => state?.user?.data.position;
+const getUserLocation = state => state?.user?.data.location;
 
 export const USER_SELECTORS = {
   getUserData,
-  getUserPosition,
+  getUserLocation,
 };

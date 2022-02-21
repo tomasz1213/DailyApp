@@ -7,27 +7,19 @@ import { Todo } from '../widgets/todo';
 import { Steps } from '../widgets/steps';
 import { Sleep } from '../widgets/sleep';
 
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistor, store } from '../store/reducer/root';
-
 import { DataInit } from '../utility/datInit';
 
 export const Home = props => {
   return (
     <>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <SafeAreaView style={styles.container}>
-            <DataInit {...props} />
-            <Weather {...props} />
-            <Water {...props} />
-            <Todo {...props} />
-            <Steps {...props} />
-            <Sleep {...props} />
-          </SafeAreaView>
-        </PersistGate>
-      </Provider>
+      <SafeAreaView style={styles.container}>
+        <DataInit {...props} />
+        <Weather {...props} />
+        <Water {...props} />
+        <Todo {...props} />
+        <Steps {...props} />
+        <Sleep {...props} />
+      </SafeAreaView>
     </>
   );
 };

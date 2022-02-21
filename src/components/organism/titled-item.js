@@ -12,8 +12,10 @@ import { fonts } from '../../utility/fonts';
 import { colors } from '../../utility/colors';
 import settingIcon from '../../assets/icons/settings.png';
 import circleIcon from '../../assets/icons/circle.png';
+import onIcon from '../../assets/icons/on.png';
+import offIcon from '../../assets/icons/off.png';
 
-export const TitledItem = ({ title, desc, onClick, icon }) => {
+export const TitledItem = ({ title, desc, onClick, icon, isOn }) => {
   const [iconData, setIconData] = useState();
   const [buttonColor, setButtonColor] = useState(colors.purple.light);
 
@@ -27,16 +29,20 @@ export const TitledItem = ({ title, desc, onClick, icon }) => {
         setIconData(circleIcon);
         break;
       }
+      case 'onOff': {
+        isOn ? setIconData(offIcon) : setIconData(onIcon);
+        break;
+      }
       default: {
         setIconData();
       }
     }
-  }, []);
+  });
 
   const handleClick = () => {
     setButtonColor(colors.purple.purple);
+    onClick();
     setTimeout(() => {
-      onClick();
       setButtonColor(colors.purple.light);
     }, 500);
   }
