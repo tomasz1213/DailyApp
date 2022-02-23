@@ -1,34 +1,39 @@
 import {createAction, createReducer} from '@reduxjs/toolkit';
 
-export const setData = createAction('SET_DATA');
+export const setCurrentWeatherData = createAction('SET_CURRENT_WEATHER_DATA');
+export const setHourWeatherData = createAction('SET_HOUR_WEATHER_DATA');
+export const setSunAndMoonData = createAction('SET_SUN_MOON_DATA');
+export const setPrecipitationData = createAction('SET_PRECIPITATION_DATA');
 export const clearData = createAction('CLEAR_DATA');
 
 const initialState = {
   isAuthenticated: false,
   data: {
-    name: '',
+    current:{},
+    nextHour:{},
+    sunMoonData:{},
+    precipitation_amount:'',
     local_time: '',
     temp_c: '',
     temp_f: '',
     sunrise: '',
     sunset: '',
-    daily_chance_of_rain: '',
   },
 };
 
 export const weatherReducer = createReducer(initialState, builder => {
   builder
-    .addCase(setData, (state, action) => {
-      state.data = {
-        name: action?.payload?.location.name || '',
-        local_time: action.payload.location.localtime,
-        temp_c: action.payload.current.temp_c,
-        temp_f: action.payload.current.temp_f,
-        sunrise: action.payload.forecast.forecastday[0].astro.sunrise,
-        sunset: action.payload.forecast.forecastday[0].astro.sunset,
-        daily_chance_of_rain:
-          action.payload.forecast.forecastday[0].day.daily_chance_of_rain,
-      };
+    .addCase(setCurrentWeatherData, (state, action) => {
+      state.data.current = action.payload;
+    })
+    .addCase(setHourWeatherData, (state, action) => {
+      state.data.nextHour = action.payload;
+    })
+    .addCase(setPrecipitationData, (state, action) => {
+      state.data.precipitation_amount = action.payload;
+    })
+    .addCase(setSunAndMoonData, (state, action) => {
+      state.data.sunMoonData = action.payload;
     })
     .addCase(clearData, () => initialState);
 });

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import GetLocation from 'react-native-get-location'
 
+import { fetchData } from '../../utility/api';
 import { TitledItem } from './titled-item';
 import { TextInputModal } from '../atoms/TextInput';
 import { setUserLocation, setUserGpsLocation } from '../../store/reducer/user';
@@ -14,7 +15,7 @@ export const LocationSetting = () => {
   const [locationGps, setLocationGps] = useState(false);
   const dispatch = useDispatch();
   const userLocation = useSelector(USER_SELECTORS.getUserData);
-  console.log(userLocation);
+
   const requestPermission = async () => {
     check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(result => {
       switch (result) {
@@ -30,7 +31,10 @@ export const LocationSetting = () => {
   };
 
   const handleAcceptButton = () => {
-    dispatch(setUserLocation(inputValue));
+    fetchData(`https://nominatim.openstreetmap.org/search.php?q=${inputValue}&format=jsonv2`)
+    .then(res => {
+      dispatch(setUserLocation(res.data[0]));
+    })
     handleShowInput();
   };
 
@@ -47,7 +51,7 @@ export const LocationSetting = () => {
   };
 
   useEffect(() => {
-    setInputValue(userLocation.location);
+    setInputValue(userLocation.location.display_name.split(',')[0]);
     setLocationGps(userLocation.gpsLocation.isOn)
   }, []);
 

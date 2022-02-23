@@ -10,7 +10,7 @@ const initialState = {
     weight: 75,
     needDrink: 2250,
     location: '',
-    gpsLocation: false,
+    gpsLocation: '',
   },
 };
 

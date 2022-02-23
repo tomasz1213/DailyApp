@@ -12,12 +12,13 @@ import Umbrella from '../assets/icons/umbrella.png';
 const defaultSize = Dimensions.get('window').height / 40 - 2;
 
 export const Weather = ({ navigation }) => {
-  const { daily_chance_of_rain, name, sunrise, sunset, temp_c, temp_f } =
-    useSelector(WEATHER_SELECTORS.getWeatherData);
+  const { name, sunrise, sunset, air_temperature, temp_f } =
+    useSelector(WEATHER_SELECTORS.getCurrentWeatherData);
+   const precipitation_amount = useSelector(WEATHER_SELECTORS.getPrecipitationData);
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Weather')}>
       <Text style={styles.textTemp}>
-        {temp_c}
+        {air_temperature}
         {'\u00b0'}C
       </Text>
       <View style={styles.weatherbox}>
@@ -58,7 +59,7 @@ export const Weather = ({ navigation }) => {
             tintColor={colors.purple.light}
           />
           <Text style={{ ...styles.umbrellaText, ...styles.text }}>
-            {daily_chance_of_rain}%
+            {precipitation_amount}%
           </Text>
         </LinearGradient>
       </View>

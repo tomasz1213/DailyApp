@@ -3,7 +3,12 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Fitness from '@ovalmoney/react-native-fitness';
 
-import { setData } from '../store/reducer/weather';
+import {
+  setCurrentWeatherData,
+  setPrecipitationData,
+  setHourWeatherData,
+  setSunAndMoonData,
+} from '../store/reducer/weather';
 import {
   setSleepData,
   setStepsData,
@@ -12,6 +17,8 @@ import {
 } from '../store/reducer/fitness';
 import { setLastReset, clearWaterData } from '../store/reducer/water';
 import { WATER_SELECTORS } from '../store/selectors/water';
+import { WEATHER_SELECTORS } from '../store/selectors/weather';
+import { USER_SELECTORS } from '../store/selectors/user';
 
 import { fetchData } from '../utility/api';
 import { permissions, requestPermission } from './permissions';
@@ -21,6 +28,8 @@ import { permissions, requestPermission } from './permissions';
 
 export const DataInit = ({ navigation }) => {
   const lastReset = useSelector(WATER_SELECTORS.getLastReset);
+  const da = useSelector(WEATHER_SELECTORS.getWeatherData);
+  const userData = useSelector(USER_SELECTORS.getUserData);
   const dispatch = useDispatch();
 
   if (!lastReset) {
@@ -32,10 +41,49 @@ export const DataInit = ({ navigation }) => {
   }
 
   useEffect(() => {
-    fetchData(
-      'http://api.weatherapi.com/v1/forecast.json?key=80b78e07cdd74bd89df193721222701&q=Ptaszkowa&days=1&aqi=yes&alerts=yes',
-    ).then(({ data }) => dispatch(setData(data)));
-  });
+    const todayDate = new Date().toISOString().split('T')[0];
+
+    const returnHourOffset = () => {
+      let offset = new Date().getTimezoneOffset()/60;
+      let extraZero;
+      if (offset < 10 || offset > -10){
+        extraZero = 0;
+        if(offset < 0){
+          extraZero = -0;
+          offset = Math.abs(offset);
+        }
+      }
+      return `${extraZero}${offset}:00`
+    };
+
+    // if (lastReset < new Date().getDate()) {
+      if (userData.gpsLocation.isOn) {
+        fetchData(
+          `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}`,
+        ).then(({ data }) => {
+          dispatch(
+            setCurrentWeatherData(data.properties.timeseries[0].data.instant.details));
+          dispatch(
+            setPrecipitationData(data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount));
+          dispatch(
+            setHourWeatherData(data.properties.timeseries[1].data.instant.details));
+        });
+        fetchData(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}&date=${todayDate}&offset=${returnHourOffset()}`)
+        .then(data => console.log(data));
+      } else if (userData.location.display_name) {
+        fetchData(
+          `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.location.lat}&lon=${userData.location.lon}`,
+        ).then(({ data }) => {
+          dispatch(
+            setCurrentWeatherData(data.properties.timeseries[0].data.instant.details));
+          dispatch(
+            setPrecipitationData(data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount));
+          dispatch(
+            setHourWeatherData(data.properties.timeseries[1].data.instant.details));
+        });
+      }
+    // }
+  }, []);
 
   useEffect(() => {
     requestPermission();
