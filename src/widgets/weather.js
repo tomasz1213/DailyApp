@@ -9,16 +9,18 @@ import { colors } from '../utility/colors';
 import Sunrise from '../assets/icons/sunrise.png';
 import Sunset from '../assets/icons/sunset.png';
 import Umbrella from '../assets/icons/umbrella.png';
+
 const defaultSize = Dimensions.get('window').height / 40 - 2;
 
 export const Weather = ({ navigation }) => {
-  const { name, sunrise, sunset, air_temperature, temp_f } =
-    useSelector(WEATHER_SELECTORS.getCurrentWeatherData);
-   const precipitation_amount = useSelector(WEATHER_SELECTORS.getPrecipitationData);
+  const currentWeather = useSelector(WEATHER_SELECTORS.getCurrentWeatherData);
+  const precipitation_amount = useSelector(WEATHER_SELECTORS.getPrecipitationData);
+  const { sunrise, sunset } = useSelector(WEATHER_SELECTORS.getWeatherData);
+  
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Weather')}>
       <Text style={styles.textTemp}>
-        {air_temperature}
+        {currentWeather?.air_temperature}
         {'\u00b0'}C
       </Text>
       <View style={styles.weatherbox}>
@@ -36,7 +38,7 @@ export const Weather = ({ navigation }) => {
             source={Sunrise}
             tintColor={colors.purple.light}
           />
-          <Text style={styles.text}>{sunrise}</Text>
+          <Text style={styles.text}>{currentWeather ? sunrise.split('T')[1].slice(0,5) : "Setup location setting"}</Text>
         </LinearGradient>
         <LinearGradient
           colors={[colors.black, '#241d3b', colors.blue.cold]}
@@ -52,7 +54,7 @@ export const Weather = ({ navigation }) => {
             source={Sunset}
             tintColor={colors.purple.light}
           />
-          <Text style={{ ...styles.lastText, ...styles.text }}>{sunset}</Text>
+          <Text style={{ ...styles.lastText, ...styles.text }}>{currentWeather ? sunset.split('T')[1].slice(0,5) : " "}</Text>
           <Image
             style={{ ...styles.umbrella, ...styles.icons }}
             source={Umbrella}
@@ -83,8 +85,8 @@ const styles = StyleSheet.create({
   text: {
     position: 'absolute',
     color: '#ffffff',
-    fontSize: defaultSize - 4,
-    marginLeft: 4,
+    fontSize: defaultSize,
+    marginLeft: '5%',
     top: '57%',
     fontFamily: fonts.ibm_bold,
     backgroundColor: 'transparent',

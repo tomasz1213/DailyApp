@@ -8,6 +8,7 @@ import {
   setPrecipitationData,
   setHourWeatherData,
   setSunAndMoonData,
+  setLocationName,
 } from '../store/reducer/weather';
 import {
   setSleepData,
@@ -17,7 +18,6 @@ import {
 } from '../store/reducer/fitness';
 import { setLastReset, clearWaterData } from '../store/reducer/water';
 import { WATER_SELECTORS } from '../store/selectors/water';
-import { WEATHER_SELECTORS } from '../store/selectors/weather';
 import { USER_SELECTORS } from '../store/selectors/user';
 
 import { fetchData } from '../utility/api';
@@ -27,10 +27,9 @@ import { permissions, requestPermission } from './permissions';
 // import LiveAudioStream from 'react-native-live-audio-stream';
 
 export const DataInit = ({ navigation }) => {
-  const lastReset = useSelector(WATER_SELECTORS.getLastReset);
-  const da = useSelector(WEATHER_SELECTORS.getWeatherData);
-  const userData = useSelector(USER_SELECTORS.getUserData);
   const dispatch = useDispatch();
+  const lastReset = useSelector(WATER_SELECTORS.getLastReset);
+  const userData = useSelector(USER_SELECTORS.getUserData);
 
   if (!lastReset) {
     dispatch(setLastReset(new Date().getDate()));
@@ -56,33 +55,56 @@ export const DataInit = ({ navigation }) => {
       return `${extraZero}${offset}:00`
     };
 
-    // if (lastReset < new Date().getDate()) {
-      if (userData.gpsLocation.isOn) {
-        fetchData(
-          `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}`,
-        ).then(({ data }) => {
-          dispatch(
-            setCurrentWeatherData(data.properties.timeseries[0].data.instant.details));
-          dispatch(
-            setPrecipitationData(data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount));
-          dispatch(
-            setHourWeatherData(data.properties.timeseries[1].data.instant.details));
-        });
-        fetchData(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}&date=${todayDate}&offset=${returnHourOffset()}`)
-        .then(data => console.log(data));
-      } else if (userData.location.display_name) {
-        fetchData(
-          `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.location.lat}&lon=${userData.location.lon}`,
-        ).then(({ data }) => {
-          dispatch(
-            setCurrentWeatherData(data.properties.timeseries[0].data.instant.details));
-          dispatch(
-            setPrecipitationData(data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount));
-          dispatch(
-            setHourWeatherData(data.properties.timeseries[1].data.instant.details));
-        });
-      }
-    // }
+    if (userData.gpsLocation.isOn) {
+      fetchData(
+        `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}`,
+      ).then(({ data }) => {
+        dispatch(
+          setCurrentWeatherData(data.properties.timeseries[0].data.instant.details));
+        dispatch(
+          setPrecipitationData(data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount));
+        dispatch(
+          setHourWeatherData(data.properties.timeseries[1]));
+      });
+      
+      fetchData(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}&date=${todayDate}&offset=${returnHourOffset()}`)
+      .then(({ data }) => dispatch(setSunAndMoonData(data.location.time[0])));
+
+      fetchData(`https://nominatim.openstreetmap.org/reverse.php?lat=${useruserData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}&format=jsonv2`)
+      .then(({data}) => {
+        if(data.address.city){
+          return dispatch(setLocationName(data.address.city))
+        }else {
+          return dispatch(setLocationName(data.address.village))
+        }
+      });
+    } else if (userData.location.display_name) {
+      fetchData(
+        `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.location.lat}&lon=${userData.location.lon}`,
+      ).then(({ data }) => {
+        dispatch(
+          setCurrentWeatherData(data.properties.timeseries[0].data.instant.details));
+        dispatch(
+          setPrecipitationData(data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount));
+        dispatch(
+          setHourWeatherData(data.properties.timeseries[1]));
+      });
+
+      fetchData(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${userData.location.lat}&lon=${userData.location.lon}&date=${todayDate}&offset=${returnHourOffset()}`)
+      .then(({ data }) => {
+        dispatch(setSunAndMoonData(data.location.time[0]));
+      });
+
+      fetchData(`https://nominatim.openstreetmap.org/reverse.php?lat=${userData.location.lat}&lon=${userData.location.lon}&format=jsonv2`)
+      .then(({data}) => {
+        if(data.address.city){
+          return dispatch(setLocationName(data.address.city))
+        }else {
+          return dispatch(setLocationName(data.address.village))
+        }
+      });
+
+    }
   }, []);
 
   useEffect(() => {

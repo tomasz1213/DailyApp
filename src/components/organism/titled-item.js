@@ -30,7 +30,7 @@ export const TitledItem = ({ title, desc, onClick, icon, isOn }) => {
         break;
       }
       case 'onOff': {
-        isOn ? setIconData(offIcon) : setIconData(onIcon);
+        isOn ? setIconData(onIcon) : setIconData(offIcon);
         break;
       }
       default: {

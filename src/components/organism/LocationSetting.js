@@ -6,12 +6,12 @@ import GetLocation from 'react-native-get-location'
 import { fetchData } from '../../utility/api';
 import { TitledItem } from './titled-item';
 import { TextInputModal } from '../atoms/TextInput';
-import { setUserLocation, setUserGpsLocation } from '../../store/reducer/user';
+import { setUserLocation, setUserGpsLocation, setIsGpsOn } from '../../store/reducer/user';
 import { USER_SELECTORS } from '../../store/selectors/user';
 
 export const LocationSetting = () => {
   const [showInput, setShowInput] = useState(false);
-  const [inputValue, setInputValue] = useState(false);
+  const [inputValue, setInputValue] = useState();
   const [locationGps, setLocationGps] = useState(false);
   const dispatch = useDispatch();
   const userLocation = useSelector(USER_SELECTORS.getUserData);
@@ -37,23 +37,37 @@ export const LocationSetting = () => {
     })
     handleShowInput();
   };
-
+  
   const handleGpsLocation = () => {
+    let status;
     requestPermission();
-    locationGps ? setLocationGps(false) : setLocationGps(true);
+    if(locationGps){
+      setLocationGps(false);
+      status = false;
+    }else {
+      setLocationGps(true);
+      status = true;
+    }
     GetLocation.getCurrentPosition({
         enableHighAccuracy: true,
         timeout: 5000,
     })
     .then(location => {
-        dispatch(setUserGpsLocation({...location, isOn: locationGps}));
+        dispatch(setUserGpsLocation({...location}));
+        dispatch(setIsGpsOn(status));
     })
   };
 
   useEffect(() => {
-    setInputValue(userLocation.location.display_name.split(',')[0]);
-    setLocationGps(userLocation.gpsLocation.isOn)
-  }, []);
+    if(userLocation.display_name){
+      setInputValue(userLocation?.location.display_name.split(',')[0]);
+      setLocationGps(userLocation?.isGpsOn);
+    }else{
+      setInputValue(' ');
+      setLocationGps(userLocation?.isGpsOn);
+    }
+
+  },[]);
 
   return (
     <>

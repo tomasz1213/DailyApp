@@ -88,7 +88,6 @@ export const Steps = ({navigation}) => {
           fromZero
           width={Dimensions.get('window').width}
           height={220}
-          onDataPointClick={value => console.log('hej')}
           showBarTops={false}
           chartConfig={{
             backgroundColor: colors.black,

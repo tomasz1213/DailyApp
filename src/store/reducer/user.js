@@ -3,6 +3,7 @@ import {createAction, createReducer} from '@reduxjs/toolkit';
 export const setUserData = createAction('SET_USER_DATA');
 export const setUserLocation = createAction('SET_USER_LOCATION');
 export const setUserGpsLocation = createAction('SET_USER_GPS_LOCATION');
+export const setIsGpsOn = createAction('SET_IS_GPS_ON');
 export const clearUserData = createAction('CLEAR_USER_DATA');
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
     needDrink: 2250,
     location: '',
     gpsLocation: '',
+    isGpsOn: false,
   },
 };
 
@@ -27,6 +29,9 @@ export const userReducer = createReducer(initialState, builder => {
     })
     .addCase(setUserGpsLocation, (state, action) => {
       state.data.gpsLocation = action?.payload;
+    })
+    .addCase(setIsGpsOn, (state, action) => {
+      state.data.isGpsOn = action?.payload;
     })
     .addCase(clearUserData, () => initialState);
 });

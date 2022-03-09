@@ -13,7 +13,6 @@ import { ConfigScreen } from './src/screens/Config';
 import { Weather } from './src/screens/Weather';
 
 const Stack = createNativeStackNavigator();
-
 const App = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
@@ -24,9 +23,9 @@ const App = () => (
             headerShown: false,
           }}>
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Config" component={ConfigScreen} />
           <Stack.Screen name="Todo" component={Todo} />
           <Stack.Screen name="Weather" component={Weather} />
-          <Stack.Screen name="Config" component={ConfigScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PersistGate>
