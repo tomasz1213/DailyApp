@@ -1,5 +1,5 @@
 import Fitness from '@ovalmoney/react-native-fitness';
-import {request, check, PERMISSIONS, RESULTS} from 'react-native-permissions';
+import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 export const permissions = [
   {

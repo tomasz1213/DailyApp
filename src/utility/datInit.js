@@ -43,16 +43,16 @@ export const DataInit = ({ navigation }) => {
     const todayDate = new Date().toISOString().split('T')[0];
 
     const returnHourOffset = () => {
-      let offset = new Date().getTimezoneOffset()/60;
+      let offset = new Date().getTimezoneOffset() / 60;
       let extraZero;
-      if (offset < 10 || offset > -10){
+      if (offset < 10 || offset > -10) {
         extraZero = 0;
-        if(offset < 0){
+        if (offset < 0) {
           extraZero = -0;
           offset = Math.abs(offset);
         }
       }
-      return `${extraZero}${offset}:00`
+      return `${extraZero}${offset}:00`;
     };
 
     if (userData.gpsLocation.isOn) {
@@ -60,22 +60,34 @@ export const DataInit = ({ navigation }) => {
         `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}`,
       ).then(({ data }) => {
         dispatch(
-          setCurrentWeatherData(data.properties.timeseries[0].data.instant.details));
+          setCurrentWeatherData(
+            data.properties.timeseries[0].data.instant.details,
+          ),
+        );
         dispatch(
-          setPrecipitationData(data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount));
-        dispatch(
-          setHourWeatherData(data.properties.timeseries[1]));
+          setPrecipitationData(
+            data.properties.timeseries[0].data.next_1_hours.details
+              .precipitation_amount,
+          ),
+        );
+        dispatch(setHourWeatherData(data.properties.timeseries[1]));
       });
-      
-      fetchData(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}&date=${todayDate}&offset=${returnHourOffset()}`)
-      .then(({ data }) => dispatch(setSunAndMoonData(data.location.time[0])));
 
-      fetchData(`https://nominatim.openstreetmap.org/reverse.php?lat=${useruserData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}&format=jsonv2`)
-      .then(({data}) => {
-        if(data.address.city){
-          return dispatch(setLocationName(data.address.city))
-        }else {
-          return dispatch(setLocationName(data.address.village))
+      fetchData(
+        `https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${
+          userData.gpsLocation.latitude
+        }&lon=${
+          userData.gpsLocation.longitude
+        }&date=${todayDate}&offset=${returnHourOffset()}`,
+      ).then(({ data }) => dispatch(setSunAndMoonData(data.location.time[0])));
+
+      fetchData(
+        `https://nominatim.openstreetmap.org/reverse.php?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}&format=jsonv2`,
+      ).then(({ data }) => {
+        if (data.address.city) {
+          return dispatch(setLocationName(data.address.city));
+        } else {
+          return dispatch(setLocationName(data.address.village));
         }
       });
     } else if (userData.location.display_name) {
@@ -83,29 +95,40 @@ export const DataInit = ({ navigation }) => {
         `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.location.lat}&lon=${userData.location.lon}`,
       ).then(({ data }) => {
         dispatch(
-          setCurrentWeatherData(data.properties.timeseries[0].data.instant.details));
+          setCurrentWeatherData(
+            data.properties.timeseries[0].data.instant.details,
+          ),
+        );
         dispatch(
-          setPrecipitationData(data.properties.timeseries[0].data.next_1_hours.details.precipitation_amount));
-        dispatch(
-          setHourWeatherData(data.properties.timeseries[1]));
+          setPrecipitationData(
+            data.properties.timeseries[0].data.next_1_hours.details
+              .precipitation_amount,
+          ),
+        );
+        dispatch(setHourWeatherData(data.properties.timeseries[1]));
       });
 
-      fetchData(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${userData.location.lat}&lon=${userData.location.lon}&date=${todayDate}&offset=${returnHourOffset()}`)
-      .then(({ data }) => {
+      fetchData(
+        `https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${
+          userData.location.lat
+        }&lon=${
+          userData.location.lon
+        }&date=${todayDate}&offset=${returnHourOffset()}`,
+      ).then(({ data }) => {
         dispatch(setSunAndMoonData(data.location.time[0]));
       });
 
-      fetchData(`https://nominatim.openstreetmap.org/reverse.php?lat=${userData.location.lat}&lon=${userData.location.lon}&format=jsonv2`)
-      .then(({data}) => {
-        if(data.address.city){
-          return dispatch(setLocationName(data.address.city))
-        }else {
-          return dispatch(setLocationName(data.address.village))
+      fetchData(
+        `https://nominatim.openstreetmap.org/reverse.php?lat=${userData.location.lat}&lon=${userData.location.lon}&format=jsonv2`,
+      ).then(({ data }) => {
+        if (data.address.city) {
+          return dispatch(setLocationName(data.address.city));
+        } else {
+          return dispatch(setLocationName(data.address.village));
         }
       });
-
     }
-  }, []);
+  });
 
   useEffect(() => {
     requestPermission();
@@ -158,7 +181,8 @@ export const DataInit = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    right: '-5%',
+    right: '-8%',
+    top: '2%',
     transform: [{ rotate: '90deg' }],
     height: '14%',
     width: '14%',

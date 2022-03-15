@@ -1,4 +1,4 @@
-import {createAction, createReducer} from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 export const setTodoData = createAction('SET_TODO_DATA');
 export const setTodoDone = createAction('SET_TODO_DONE');
@@ -11,7 +11,7 @@ const initialState = {
       {
         title: 'Test Task',
         isDone: false,
-        time: {from: '', to: ''},
+        time: { from: '', to: '' },
         body: '',
         alert: false,
         id: 0,
@@ -19,7 +19,7 @@ const initialState = {
       {
         title: 'Test Task NotDOne',
         isDone: false,
-        time: {from: '', to: ''},
+        time: { from: '', to: '' },
         body: '',
         alert: false,
         id: 1,
@@ -31,7 +31,7 @@ const initialState = {
     id: 0,
     title: '',
     isDone: false,
-    time: {from: '', to: ''},
+    time: { from: '', to: '' },
     body: '',
     alert: false,
   },
@@ -42,7 +42,7 @@ export const todoReducer = createReducer(initialState, builder => {
     .addCase(setTodoData, (state, action) => {
       (state.todo = action?.payload?.todo || []),
         (state.note = action?.payload?.note || []),
-        (state.data = {...state.data, ...action.payload});
+        (state.data = { ...state.data, ...action.payload });
     })
     .addCase(setTodoDone, (state, action) => {
       const tasksNotDone = state.todo.ready.filter(

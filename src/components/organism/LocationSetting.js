@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
-import GetLocation from 'react-native-get-location'
+import GetLocation from 'react-native-get-location';
 
 import { fetchData } from '../../utility/api';
 import { TitledItem } from './titled-item';
 import { TextInputModal } from '../atoms/TextInput';
-import { setUserLocation, setUserGpsLocation, setIsGpsOn } from '../../store/reducer/user';
+import {
+  setUserLocation,
+  setUserGpsLocation,
+  setIsGpsOn,
+} from '../../store/reducer/user';
 import { USER_SELECTORS } from '../../store/selectors/user';
 
 export const LocationSetting = () => {
@@ -31,43 +35,42 @@ export const LocationSetting = () => {
   };
 
   const handleAcceptButton = () => {
-    fetchData(`https://nominatim.openstreetmap.org/search.php?q=${inputValue}&format=jsonv2`)
-    .then(res => {
+    fetchData(
+      `https://nominatim.openstreetmap.org/search.php?q=${inputValue}&format=jsonv2`,
+    ).then(res => {
       dispatch(setUserLocation(res.data[0]));
-    })
+    });
     handleShowInput();
   };
-  
+
   const handleGpsLocation = () => {
     let status;
     requestPermission();
-    if(locationGps){
+    if (locationGps) {
       setLocationGps(false);
       status = false;
-    }else {
+    } else {
       setLocationGps(true);
       status = true;
     }
     GetLocation.getCurrentPosition({
-        enableHighAccuracy: true,
-        timeout: 5000,
-    })
-    .then(location => {
-        dispatch(setUserGpsLocation({...location}));
-        dispatch(setIsGpsOn(status));
-    })
+      enableHighAccuracy: true,
+      timeout: 5000,
+    }).then(location => {
+      dispatch(setUserGpsLocation({ ...location }));
+      dispatch(setIsGpsOn(status));
+    });
   };
 
   useEffect(() => {
-    if(userLocation.display_name){
+    if (userLocation.display_name) {
       setInputValue(userLocation?.location.display_name.split(',')[0]);
       setLocationGps(userLocation?.isGpsOn);
-    }else{
+    } else {
       setInputValue(' ');
       setLocationGps(userLocation?.isGpsOn);
     }
-
-  },[]);
+  }, []);
 
   return (
     <>

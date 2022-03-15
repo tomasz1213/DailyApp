@@ -1,4 +1,4 @@
-import {createAction, createReducer} from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 export const setUserData = createAction('SET_USER_DATA');
 export const setUserLocation = createAction('SET_USER_LOCATION');

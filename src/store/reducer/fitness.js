@@ -1,4 +1,4 @@
-import {createAction, createReducer} from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 export const setStepsData = createAction('SET_STEPS_DATA');
 export const setCaloriesData = createAction('SET_CALORIES_DATA');

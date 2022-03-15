@@ -4,12 +4,10 @@ import React from 'react';
 import { LocationSetting } from '../components/organism/LocationSetting';
 import { BackButton } from '../components/atoms/BackButton';
 
-
 import { fonts } from '../utility/fonts';
 import { colors } from '../utility/colors';
 
 export const ConfigScreen = ({ navigation }) => {
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>

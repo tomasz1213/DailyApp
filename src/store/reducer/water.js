@@ -1,4 +1,4 @@
-import {createAction, createReducer} from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 export const setWaterData = createAction('SET_WATER_DATA');
 export const setLastReset = createAction('SET_LAST_RESET');
@@ -23,5 +23,5 @@ export const waterReducer = createReducer(initialState, builder => {
     .addCase(setLastReset, (state, action) => {
       state.lastReset = action.payload;
     })
-    .addCase(clearWaterData, () => initialState)
+    .addCase(clearWaterData, () => initialState);
 });

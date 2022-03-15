@@ -45,7 +45,7 @@ export const TitledItem = ({ title, desc, onClick, icon, isOn }) => {
     setTimeout(() => {
       setButtonColor(colors.purple.light);
     }, 500);
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -54,11 +54,7 @@ export const TitledItem = ({ title, desc, onClick, icon, isOn }) => {
         <Text style={{ ...styles.text, ...styles.body }}>{desc}</Text>
       </View>
       <TouchableOpacity onPress={handleClick} style={styles.buttonContainer}>
-        <Image
-          source={iconData}
-          style={styles.icon}
-          tintColor={buttonColor}
-        />
+        <Image source={iconData} style={styles.icon} tintColor={buttonColor} />
       </TouchableOpacity>
     </View>
   );
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '15%',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   header: {
     fontSize: 16,

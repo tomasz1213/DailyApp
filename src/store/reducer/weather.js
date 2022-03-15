@@ -1,4 +1,4 @@
-import {createAction, createReducer} from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 export const setCurrentWeatherData = createAction('SET_CURRENT_WEATHER_DATA');
 export const setHourWeatherData = createAction('SET_HOUR_WEATHER_DATA');
@@ -11,14 +11,14 @@ export const clearData = createAction('CLEAR_DATA');
 const initialState = {
   isAuthenticated: false,
   data: {
-    current:{},
-    next_hour:{},
-    sun_moon_data:{},
-    precipitation_amount:'',
+    current: {},
+    next_hour: {},
+    sun_moon_data: {},
+    precipitation_amount: '',
     local_time: '',
     temp_c: '',
     temp_f: '',
-    location_name:'',
+    location_name: '',
     sunrise: 'T00:00',
     sunset: 'T00:00',
   },

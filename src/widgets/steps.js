@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import {BarChart} from 'react-native-chart-kit';
-import {fonts} from '../utility/fonts';
-import {colors} from '../utility/colors';
-import {useSelector} from 'react-redux';
-import {FIT_SELECTORS} from '../store/selectors/fitness';
+import { BarChart } from 'react-native-chart-kit';
+import { fonts } from '../utility/fonts';
+import { colors } from '../utility/colors';
+import { useSelector } from 'react-redux';
+import { FIT_SELECTORS } from '../store/selectors/fitness';
 
-export const Steps = ({navigation}) => {
+export const Steps = ({ navigation }) => {
   const stepsData = useSelector(FIT_SELECTORS.getStepsData);
   const calories = useSelector(FIT_SELECTORS.getCaloriesData);
   const distance = useSelector(FIT_SELECTORS.getDistanceData);
@@ -62,12 +62,16 @@ export const Steps = ({navigation}) => {
     const daysData = steps.map(el =>
       new Date(el.endDate.split('T')[0]).getDay(),
     );
-    if (daysData.length >= 7) daysData.splice(0, daysData.length - 7);
+    if (daysData.length >= 7) {
+      daysData.splice(0, daysData.length - 7);
+    }
     return daysData.map(el => weekDays[el]);
   };
   const generateData = () => {
     const data = steps.map(el => el.quantity);
-    if (data.length >= 7) data.splice(0, data.length - 7);
+    if (data.length >= 7) {
+      data.splice(0, data.length - 7);
+    }
     return data;
   };
   const data = {

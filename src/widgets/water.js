@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,18 +7,18 @@ import {
   TouchableOpacity,
   Animated,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {WATER_SELECTORS} from '../store/selectors/water';
-import {USER_SELECTORS} from '../store/selectors/user';
-import {setWaterData} from '../store/reducer/water';
+import { useSelector, useDispatch } from 'react-redux';
+import { WATER_SELECTORS } from '../store/selectors/water';
+import { USER_SELECTORS } from '../store/selectors/user';
+import { setWaterData } from '../store/reducer/water';
 import Glass from '../assets/icons/glasss.png';
-import {fonts} from '../utility/fonts';
-import {colors} from '../utility/colors';
+import { fonts } from '../utility/fonts';
+import { colors } from '../utility/colors';
 import Bottle from '../assets/icons/human.png';
 
 export const Water = () => {
-  const {glassSize, waterDrink} = useSelector(WATER_SELECTORS.getWaterData);
-  const {needDrink} = useSelector(USER_SELECTORS.getUserData);
+  const { glassSize, waterDrink } = useSelector(WATER_SELECTORS.getWaterData);
+  const { needDrink } = useSelector(USER_SELECTORS.getUserData);
   const dispatch = useDispatch();
   const [bottlePercent, setBottlePercent] = useState(0);
   let bottlePercentHeight = useRef(new Animated.Value(70)).current;
@@ -38,8 +38,10 @@ export const Water = () => {
   const handleGlassClick = () => {
     const waterAllReadyDrunk = waterDrink + glassSize;
 
-    if (bottlePercent >= 110) return;
-    dispatch(setWaterData({waterDrink: waterAllReadyDrunk}));
+    if (bottlePercent >= 110) {
+      return;
+    }
+    dispatch(setWaterData({ waterDrink: waterAllReadyDrunk }));
     setBottlePercent(calculatePercentage.toFixed(0));
     Animated.timing(bottlePercentHeight, {
       toValue: -bottlePercent + 70,
@@ -56,7 +58,7 @@ export const Water = () => {
       <Animated.Text
         style={{
           ...styles.waterUsed,
-          transform: [{translateY: bottlePercentHeight}],
+          transform: [{ translateY: bottlePercentHeight }],
         }}>
         {bottlePercent}%
       </Animated.Text>

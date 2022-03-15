@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,12 +7,12 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
-import {colors} from '../utility/colors';
+import { colors } from '../utility/colors';
 import musicalIcon from '../assets/icons/musical-note.png';
 import noteIcon from '../assets/icons/note.png';
 import { fonts } from '../utility/fonts';
 
-export const Sleep = ({navigation}) => {
+export const Sleep = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.sidebButton}>

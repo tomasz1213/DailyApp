@@ -14,9 +14,11 @@ const defaultSize = Dimensions.get('window').height / 40 - 2;
 
 export const Weather = ({ navigation }) => {
   const currentWeather = useSelector(WEATHER_SELECTORS.getCurrentWeatherData);
-  const precipitation_amount = useSelector(WEATHER_SELECTORS.getPrecipitationData);
+  const precipitation_amount = useSelector(
+    WEATHER_SELECTORS.getPrecipitationData,
+  );
   const { sunrise, sunset } = useSelector(WEATHER_SELECTORS.getWeatherData);
-  
+
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Weather')}>
       <Text style={styles.textTemp}>
@@ -38,7 +40,11 @@ export const Weather = ({ navigation }) => {
             source={Sunrise}
             tintColor={colors.purple.light}
           />
-          <Text style={styles.text}>{currentWeather ? sunrise.split('T')[1].slice(0,5) : "Setup location setting"}</Text>
+          <Text style={styles.text}>
+            {currentWeather
+              ? sunrise.split('T')[1].slice(0, 5)
+              : 'Setup location setting'}
+          </Text>
         </LinearGradient>
         <LinearGradient
           colors={[colors.black, '#241d3b', colors.blue.cold]}
@@ -54,7 +60,9 @@ export const Weather = ({ navigation }) => {
             source={Sunset}
             tintColor={colors.purple.light}
           />
-          <Text style={{ ...styles.lastText, ...styles.text }}>{currentWeather ? sunset.split('T')[1].slice(0,5) : " "}</Text>
+          <Text style={{ ...styles.lastText, ...styles.text }}>
+            {currentWeather ? sunset.split('T')[1].slice(0, 5) : ' '}
+          </Text>
           <Image
             style={{ ...styles.umbrella, ...styles.icons }}
             source={Umbrella}

@@ -4,14 +4,14 @@ import React from 'react';
 import { colors } from '../../utility/colors';
 import left from '../../assets/icons/left.png';
 
-export const BackButton = (navigation ) => {
+export const BackButton = navigation => {
   const handleBackNavigation = () => {
     if (navigation.canGoBack()) {
       navigation.pop();
     } else {
       navigation.navigate('Home');
     }
-  }
+  };
   return (
     <TouchableOpacity onPress={handleBackNavigation} style={styles.container}>
       <Image

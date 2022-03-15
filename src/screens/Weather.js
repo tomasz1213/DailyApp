@@ -1,4 +1,4 @@
-import {Text, StyleSheet, View, TouchableOpacity, Image} from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -12,20 +12,27 @@ import location_icon from '../assets/icons/location.png';
 export const Weather = ({ navigation }) => {
   const weatherData = useSelector(WEATHER_SELECTORS.getWeatherData);
   const { air_temperature } = weatherData.current;
-  console.log(weatherData.next_hour.data.next_1_hours)
+  console.log(weatherData.next_hour.data.next_1_hours);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <BackButton {...navigation}/>
+        <BackButton {...navigation} />
         <Text style={styles.text}>Weather</Text>
       </View>
       <View style={styles.main}>
         <View style={styles.location}>
-          <Image tintColor={colors.purple.light} style={styles.icon} source={location_icon}/>
+          <Image
+            tintColor={colors.purple.light}
+            style={styles.icon}
+            source={location_icon}
+          />
           <Text style={styles.text_high}>{weatherData.location_name}</Text>
         </View>
         <View>
-          <Text style={styles.text_temp}>{air_temperature}{'\u00b0'}C</Text>
+          <Text style={styles.text_temp}>
+            {air_temperature}
+            {'\u00b0'}C
+          </Text>
         </View>
       </View>
     </View>
@@ -36,14 +43,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.black,
     width: '100%',
-    height: '100%', 
+    height: '100%',
   },
   header: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height:'25%',
+    height: '25%',
     width: '100%',
   },
   main: {
@@ -74,10 +81,10 @@ const styles = StyleSheet.create({
     height: 16,
     marginRight: 2,
   },
-  location:{
+  location: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
 });
