@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '90%',
     marginVertical: '3%',
+    marginLeft: '-4%',
   },
   chart: {
     margin: 0,
