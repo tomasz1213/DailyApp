@@ -2,6 +2,7 @@ import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import React from 'react';
 
 import { LocationSetting } from '../components/organism/LocationSetting';
+import { AuthButtons } from '../components/organism/AuthButtons';
 import { BackButton } from '../components/atoms/BackButton';
 
 import { fonts } from '../utility/fonts';
@@ -14,11 +15,12 @@ export const ConfigScreen = ({ navigation }) => {
         <BackButton {...navigation} />
         <Text style={styles.text}>Configuration</Text>
       </View>
-      <View>
+      <View style={{ height: '70%' }}>
         <ScrollView style={styles.items}>
           <LocationSetting />
         </ScrollView>
       </View>
+      <AuthButtons />
     </View>
   );
 };

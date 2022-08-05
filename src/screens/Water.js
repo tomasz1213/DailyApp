@@ -1,4 +1,11 @@
-import { Text, StyleSheet, View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -14,17 +21,8 @@ import humidity_icon from '../assets/icons/Humidity_icon.png';
 import clouds_icon from '../assets/icons/clouds.png';
 import wind_icon from '../assets/icons/wind.png';
 
-export const Weather = ({ navigation }) => {
-  const [weatherIcon, setWeatherIcon] = useState();
-  const weatherData = useSelector(WEATHER_SELECTORS.getWeatherData);
-  const {
-    air_temperature,
-    relative_humidity,
-    cloud_area_fraction,
-    wind_speed,
-    wind_from_direction,
-  } = weatherData.current;
-  console.log(weatherData.current); // TODO Create api for icons
+export const Water = ({ navigation }) => {
+
 
   return (
     <View style={styles.container}>
@@ -37,71 +35,21 @@ export const Weather = ({ navigation }) => {
         }}>
         <View style={styles.header}>
           <BackButton {...navigation} />
-          <Text style={styles.text}>Weather</Text>
+          <Text style={styles.text}>Water</Text>
         </View>
         <View style={styles.main}>
-          <View style={styles.location}>
-            <Image
-              tintColor={colors.purple.light}
-              style={styles.icon}
-              source={location_icon}
-            />
-            <Text style={styles.text_high}>{weatherData.location_name}</Text>
-          </View>
-          <View>
-            <Text style={styles.text_temp}>
-              {air_temperature}
-              {'\u00b0'}C
-            </Text>
-            <View style={styles.location}>
-              <Image style={styles.weather_icon} source={weather_icon} />
-            </View>
             <View style={styles.info_box}>
-              <DataBox
+                <DataBox
                 title="Humidity"
-                data={`${relative_humidity} %`}
+                data={`1 %`}
                 icon={humidity_icon}
-              />
-              <DataBox
+                />
+                <DataBox
                 title="Clouds"
-                data={`${cloud_area_fraction} %`}
+                data={`2 %`}
                 icon={clouds_icon}
-              />
-              <DataBox
-                title="Wind"
-                data={`${wind_speed} km/h`}
-                icon={wind_icon}
-                tintColor="white"
-              />
-              <DataBox
-                title="Direction"
-                data={`${wind_from_direction} \u00b0`}
-                icon={wind_icon}
-              />
-              <DataBox
-                title="Wind"
-                data={`${wind_speed} km/h`}
-                icon={wind_icon}
-                tintColor="white"
-              />
-              <DataBox
-                title="Direction"
-                data={`${wind_from_direction} \u00b0`}
-                icon={wind_icon}
-              />
-              <DataBox
-                title="Wind"
-                data={`${wind_speed} km/h`}
-                icon={wind_icon}
-                tintColor="white"
-              />
-              <DataBox
-                title="Direction"
-                data={`${wind_from_direction} \u00b0`}
-                icon={wind_icon}
-              />
+                />
             </View>
-          </View>
         </View>
       </ScrollView>
     </View>
@@ -165,6 +113,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 30,
   },
 });

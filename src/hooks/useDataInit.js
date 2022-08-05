@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Fitness from '@ovalmoney/react-native-fitness';
 
@@ -21,12 +20,14 @@ import { WATER_SELECTORS } from '../store/selectors/water';
 import { USER_SELECTORS } from '../store/selectors/user';
 
 import { fetchData } from '../utility/api';
-import { permissions, requestPermission } from './permissions';
-
+import { permissions, requestPermission } from '../utility/permissions';
+import { returnHourOffset } from '../utility/countHourOffset';
+import { apiRequest } from '../helpers/api';
+import { setIsAuthenticated } from '../store/reducer/user';
 // import {Buffer} from 'buffer';
 // import LiveAudioStream from 'react-native-live-audio-stream';
 
-export const DataInit = ({ navigation }) => {
+export const useDataInit = () => {
   const dispatch = useDispatch();
   const lastReset = useSelector(WATER_SELECTORS.getLastReset);
   const userData = useSelector(USER_SELECTORS.getUserData);
@@ -40,22 +41,22 @@ export const DataInit = ({ navigation }) => {
   }
 
   useEffect(() => {
+    if (userData?.token) {
+      apiRequest('POST', 'user/checkAuth')
+        .then(data => {
+          dispatch(setIsAuthenticated({ isAuthenticated: true, data }));
+        })
+        .catch(err => {
+          console.log(err);
+          dispatch(setIsAuthenticated({ isAuthenticated: false, token: '' }));
+        });
+    }
+  }, []);
+
+  useEffect(() => {
     const todayDate = new Date().toISOString().split('T')[0];
 
-    const returnHourOffset = () => {
-      let offset = new Date().getTimezoneOffset() / 60;
-      let extraZero;
-      if (offset < 10 || offset > -10) {
-        extraZero = 0;
-        if (offset < 0) {
-          extraZero = -0;
-          offset = Math.abs(offset);
-        }
-      }
-      return `${extraZero}${offset}:00`;
-    };
-
-    if (userData.gpsLocation.isOn) {
+    if (userData.gpsLocation?.isOn) {
       fetchData(
         `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.gpsLocation.latitude}&lon=${userData.gpsLocation.longitude}`,
       ).then(({ data }) => {
@@ -90,7 +91,7 @@ export const DataInit = ({ navigation }) => {
           return dispatch(setLocationName(data.address.village));
         }
       });
-    } else if (userData.location.display_name) {
+    } else if (userData.location?.display_name) {
       fetchData(
         `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.location.lat}&lon=${userData.location.lon}`,
       ).then(({ data }) => {
@@ -122,6 +123,7 @@ export const DataInit = ({ navigation }) => {
         `https://nominatim.openstreetmap.org/reverse.php?lat=${userData.location.lat}&lon=${userData.location.lon}&format=jsonv2`,
       ).then(({ data }) => {
         if (data.address.city) {
+          console.log(JSON.stringify(data));
           return dispatch(setLocationName(data.address.city));
         } else {
           return dispatch(setLocationName(data.address.village));
@@ -168,33 +170,7 @@ export const DataInit = ({ navigation }) => {
         console.log(error);
       });
   });
-
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Config')}>
-        <Text style={styles.text}>...</Text>
-      </TouchableOpacity>
-    </View>
-  );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    right: '-8%',
-    top: '2%',
-    transform: [{ rotate: '90deg' }],
-    height: '14%',
-    width: '14%',
-    zIndex: 2,
-  },
-  text: {
-    paddingTop: '80%',
-    paddingLeft: '13%',
-    color: 'white',
-    fontSize: 40,
-  },
-});
 
 // TODO --- SLEEP analytics values like [220-225, 0-10] ---> sound of silience
 // useEffect(() => {

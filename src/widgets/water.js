@@ -16,7 +16,7 @@ import { fonts } from '../utility/fonts';
 import { colors } from '../utility/colors';
 import Bottle from '../assets/icons/human.png';
 
-export const Water = () => {
+export const Water = ({ navigation }) => {
   const { glassSize, waterDrink } = useSelector(WATER_SELECTORS.getWaterData);
   const { needDrink } = useSelector(USER_SELECTORS.getUserData);
   const dispatch = useDispatch();
@@ -49,7 +49,9 @@ export const Water = () => {
     }).start();
   };
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Water')}
+      style={styles.container}>
       <Image
         style={styles.bottle}
         source={Bottle}
@@ -70,7 +72,7 @@ export const Water = () => {
         />
         <Text style={styles.glassPlus}>+</Text>
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 

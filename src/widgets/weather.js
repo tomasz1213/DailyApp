@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { WEATHER_SELECTORS } from '../store/selectors/weather';
 import { fonts } from '../utility/fonts';
 import { colors } from '../utility/colors';
+import { returnHourOffset } from '../utility/countHourOffset';
 import Sunrise from '../assets/icons/sunrise.png';
 import Sunset from '../assets/icons/sunset.png';
 import Umbrella from '../assets/icons/umbrella.png';
@@ -18,7 +19,7 @@ export const Weather = ({ navigation }) => {
     WEATHER_SELECTORS.getPrecipitationData,
   );
   const { sunrise, sunset } = useSelector(WEATHER_SELECTORS.getWeatherData);
-
+    console.log(returnHourOffset());
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Weather')}>
       <Text style={styles.textTemp}>

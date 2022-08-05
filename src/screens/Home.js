@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 
 import { Weather } from '../widgets/weather';
 import { Water } from '../widgets/water';
@@ -7,18 +7,22 @@ import { Todo } from '../widgets/todo';
 import { Steps } from '../widgets/steps';
 import { Sleep } from '../widgets/sleep';
 
-import { DataInit } from '../utility/datInit';
+import { SettingButton } from '../components/atoms/SettingButton';
+import { useDataInit } from '../hooks/useDataInit';
 
 export const Home = props => {
+  useDataInit();
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <DataInit {...props} />
-        <Weather {...props} />
-        <Water {...props} />
-        <Todo {...props} />
-        <Steps {...props} />
-        <Sleep {...props} />
+        <ScrollView>
+          <SettingButton {...props} />
+          <Weather {...props} />
+          <Water {...props} />
+          <Todo {...props} />
+          <Steps {...props} />
+          <Sleep {...props} />
+        </ScrollView>
       </SafeAreaView>
     </>
   );

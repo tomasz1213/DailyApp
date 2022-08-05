@@ -31,7 +31,7 @@ export const DataBox = ({ data, icon, title, tintColor }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    height: 100,
     width: '40%',
     margin: 10,
     backgroundColor: 'rgba(52, 52, 52, 0.8)',

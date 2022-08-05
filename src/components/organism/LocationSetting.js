@@ -4,8 +4,9 @@ import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import GetLocation from 'react-native-get-location';
 
 import { fetchData } from '../../utility/api';
-import { TitledItem } from './titled-item';
+import { TitledItem } from '../organism/TitledItem';
 import { TextInputModal } from '../atoms/TextInput';
+import { Modal } from '../atoms/Modal';
 import {
   setUserLocation,
   setUserGpsLocation,
@@ -75,12 +76,14 @@ export const LocationSetting = () => {
   return (
     <>
       {showInput && (
-        <TextInputModal
+        <Modal
           onClickAccept={handleAcceptButton}
-          onClickCancel={handleShowInput}
-          handleInputChange={setInputValue}
-          inputValue={inputValue}
-        />
+          onClickCancel={handleShowInput}>
+          <TextInputModal
+            handleInputChange={setInputValue}
+            inputValue={inputValue}
+          />
+        </Modal>
       )}
       <TitledItem
         onClick={handleShowInput}
