@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { Text, StyleSheet, View, Image, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -9,14 +9,14 @@ import { DataBox } from '../components/atoms/DataBox';
 import { fonts } from '../utility/fonts';
 import { colors } from '../utility/colors';
 import location_icon from '../assets/icons/location.png';
-import weather_icon from '../assets/icons/weather/clearsky_day.png';
 import humidity_icon from '../assets/icons/Humidity_icon.png';
 import clouds_icon from '../assets/icons/clouds.png';
 import wind_icon from '../assets/icons/wind.png';
 
 export const Weather = ({ navigation }) => {
-  const [weatherIcon, setWeatherIcon] = useState();
   const weatherData = useSelector(WEATHER_SELECTORS.getWeatherData);
+  const imageData = weatherData.next_hour.data.next_1_hours.summary.symbol_code;
+  const [weatherIcon, setWeatherIcon] = useState();
   const {
     air_temperature,
     relative_humidity,
@@ -24,8 +24,10 @@ export const Weather = ({ navigation }) => {
     wind_speed,
     wind_from_direction,
   } = weatherData.current;
-  console.log(weatherData.current); // TODO Create api for icons
 
+  useEffect(() => {
+    setWeatherIcon(`http://192.168.8.100:5000/upload/weather/${imageData}.png`);
+  }, [imageData]);
   return (
     <View style={styles.container}>
       <ScrollView
@@ -54,7 +56,12 @@ export const Weather = ({ navigation }) => {
               {'\u00b0'}C
             </Text>
             <View style={styles.location}>
-              <Image style={styles.weather_icon} source={weather_icon} />
+              <Image
+                style={styles.weather_icon}
+                source={{
+                  uri: weatherIcon,
+                }}
+              />
             </View>
             <View style={styles.info_box}>
               <DataBox

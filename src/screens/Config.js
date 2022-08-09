@@ -15,12 +15,12 @@ export const ConfigScreen = ({ navigation }) => {
         <BackButton {...navigation} />
         <Text style={styles.text}>Configuration</Text>
       </View>
-      <View style={{ height: '70%' }}>
+      <View style={{ height: '93%' }}>
         <ScrollView style={styles.items}>
           <LocationSetting />
         </ScrollView>
+        <AuthButtons />
       </View>
-      <AuthButtons />
     </View>
   );
 };

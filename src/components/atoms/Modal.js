@@ -23,13 +23,12 @@ export const Modal = ({ onClickAccept, onClickCancel, children }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    height: '100%',
     width: '100%',
+    height: '100%',
     backgroundColor: colors.black,
     opacity: 0.8,
-    zIndex: 3,
+    zIndex: 99,
     alignItems: 'center',
-    bottom: '70%',
   },
   modal: {
     opacity: 1,

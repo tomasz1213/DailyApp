@@ -9,7 +9,7 @@ import { apiRequest } from '../../helpers/api';
 import { fonts } from '../../utility/fonts';
 import { colors } from '../../utility/colors';
 import { USER_SELECTORS } from '../../store/selectors/user';
-import { registerUser } from '../../store/reducer/user';
+import { registerUser, setIsAuthenticated } from '../../store/reducer/user';
 
 export const AuthButtons = () => {
   const dispatch = useDispatch();
@@ -107,7 +107,7 @@ export const AuthButtons = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       {isModalOpen && handleModalSelection(isModalRegister)}
       <View style={styles.authButtons}>
         {!isAuthenticated && (
@@ -119,7 +119,7 @@ export const AuthButtons = () => {
             <Text style={styles.registerButton}>Register</Text>
           </TouchableOpacity>
         )}
-        {!isAuthenticated && (
+        {!isAuthenticated ? (
           <TouchableOpacity
             onPress={() => {
               setIsModalOpen(true);
@@ -127,17 +127,26 @@ export const AuthButtons = () => {
             }}>
             <Text style={styles.registerButton}>Login</Text>
           </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(
+                setIsAuthenticated({
+                  token: '',
+                  isAuthenticated: false,
+                  login: '',
+                }),
+              );
+            }}>
+            <Text style={styles.registerButton}>Logout</Text>
+          </TouchableOpacity>
         )}
       </View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-  },
   authButtons: {
     display: 'flex',
     flexDirection: 'row',
