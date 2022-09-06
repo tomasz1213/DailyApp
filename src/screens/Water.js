@@ -1,28 +1,26 @@
-import {
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
+import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import * as Progress from 'react-native-progress';
 
-import { WEATHER_SELECTORS } from '../store/selectors/weather';
+import { WATER_SELECTORS } from '../store/selectors/water';
+import { USER_SELECTORS } from '../store/selectors/user';
 import { BackButton } from '../components/atoms/BackButton';
-import { DataBox } from '../components/atoms/DataBox';
+
+import { CustomSizeButtons } from '../components/organism/CupSizeButtons';
 
 import { fonts } from '../utility/fonts';
 import { colors } from '../utility/colors';
-import location_icon from '../assets/icons/location.png';
-import weather_icon from '../assets/icons/weather/clearsky_day.png';
-import humidity_icon from '../assets/icons/Humidity_icon.png';
-import clouds_icon from '../assets/icons/clouds.png';
-import wind_icon from '../assets/icons/wind.png';
 
 export const Water = ({ navigation }) => {
+  const { waterDrink } = useSelector(WATER_SELECTORS.getWaterData);
+  const { needDrink } = useSelector(USER_SELECTORS.getUserData);
+  const calculatePercentage = ((waterDrink / needDrink) * 100) / 100;
+  const [percentageDrunk, setPercentageDrunk] = useState(calculatePercentage);
 
+  useEffect(() => {
+    setPercentageDrunk(+calculatePercentage.toFixed(2));
+  }, [calculatePercentage, waterDrink]);
 
   return (
     <View style={styles.container}>
@@ -38,18 +36,17 @@ export const Water = ({ navigation }) => {
           <Text style={styles.text}>Water</Text>
         </View>
         <View style={styles.main}>
-            <View style={styles.info_box}>
-                <DataBox
-                title="Humidity"
-                data={`1 %`}
-                icon={humidity_icon}
-                />
-                <DataBox
-                title="Clouds"
-                data={`2 %`}
-                icon={clouds_icon}
-                />
-            </View>
+          <Progress.Circle
+            size={170}
+            showsText={true}
+            thickness={10}
+            progress={percentageDrunk}
+            color="#A5D9D9"
+            borderWidth={2}
+          />
+          <View style={styles.info_box}>
+            <CustomSizeButtons />
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -72,7 +69,8 @@ const styles = StyleSheet.create({
   },
   main: {
     width: '100%',
-    height: '30%',
+    justifyContent: 'center',
+    alignItems: 'center',
     color: 'white',
   },
   text: {
@@ -109,6 +107,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   info_box: {
+    marginTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
