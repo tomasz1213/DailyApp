@@ -12,14 +12,10 @@ import location_icon from '../assets/icons/location.png';
 import humidity_icon from '../assets/icons/Humidity_icon.png';
 import clouds_icon from '../assets/icons/clouds.png';
 import wind_icon from '../assets/icons/wind.png';
-import rain_icon from '../assets/icons/rain.png';
-import atmospheric_pressure_icon from '../assets/icons/atmospheric-pressure.png';
-import compass from '../assets/icons/compass.png';
 
 export const Weather = ({ navigation }) => {
   const weatherData = useSelector(WEATHER_SELECTORS.getWeatherData);
-  const imageData =
-    weatherData?.next_hour?.data?.next_1_hours?.summary?.symbol_code;
+  const imageData = weatherData.next_hour.data.next_1_hours.summary.symbol_code;
   const [weatherIcon, setWeatherIcon] = useState();
   const {
     air_temperature,
@@ -28,9 +24,9 @@ export const Weather = ({ navigation }) => {
     wind_speed,
     wind_from_direction,
   } = weatherData.current;
-  console.log(weatherData?.next_hour?.data);
+
   useEffect(() => {
-    setWeatherIcon(`http://192.168.8.168:5000/upload/weather/${imageData}.png`);
+    setWeatherIcon(`http://192.168.8.100:5000/upload/weather/${imageData}.png`);
   }, [imageData]);
   return (
     <View style={styles.container}>
@@ -87,19 +83,18 @@ export const Weather = ({ navigation }) => {
               <DataBox
                 title="Direction"
                 data={`${wind_from_direction} \u00b0`}
-                icon={compass}
+                icon={wind_icon}
+              />
+              <DataBox
+                title="Wind"
+                data={`${wind_speed} km/h`}
+                icon={wind_icon}
                 tintColor="white"
               />
               <DataBox
-                title="Rain"
-                data={`${weatherData?.next_hour?.data?.next_1_hours?.details.precipitation_amount} mm`}
-                icon={rain_icon}
-              />
-              <DataBox
-                title="Pressure"
-                data={`${weatherData?.next_hour?.data.instant.details.air_pressure_at_sea_level} hPa`}
-                icon={atmospheric_pressure_icon}
-                tintColor="white"
+                title="Direction"
+                data={`${wind_from_direction} \u00b0`}
+                icon={wind_icon}
               />
               <DataBox
                 title="Wind"
@@ -178,6 +173,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 30,
-    height: '100%',
   },
 });

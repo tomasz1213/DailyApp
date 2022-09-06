@@ -16,11 +16,14 @@ import { DataBox } from '../components/atoms/DataBox';
 import { fonts } from '../utility/fonts';
 import { colors } from '../utility/colors';
 import location_icon from '../assets/icons/location.png';
+import weather_icon from '../assets/icons/weather/clearsky_day.png';
 import humidity_icon from '../assets/icons/Humidity_icon.png';
 import clouds_icon from '../assets/icons/clouds.png';
 import wind_icon from '../assets/icons/wind.png';
 
 export const Water = ({ navigation }) => {
+
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -35,7 +38,18 @@ export const Water = ({ navigation }) => {
           <Text style={styles.text}>Water</Text>
         </View>
         <View style={styles.main}>
-          <View style={styles.info_box}></View>
+            <View style={styles.info_box}>
+                <DataBox
+                title="Humidity"
+                data={`1 %`}
+                icon={humidity_icon}
+                />
+                <DataBox
+                title="Clouds"
+                data={`2 %`}
+                icon={clouds_icon}
+                />
+            </View>
         </View>
       </ScrollView>
     </View>
