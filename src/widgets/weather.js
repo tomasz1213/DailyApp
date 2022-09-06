@@ -19,7 +19,7 @@ export const Weather = ({ navigation }) => {
     WEATHER_SELECTORS.getPrecipitationData,
   );
   const { sunrise, sunset } = useSelector(WEATHER_SELECTORS.getWeatherData);
-    console.log(returnHourOffset());
+
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Weather')}>
       <Text style={styles.textTemp}>

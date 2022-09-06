@@ -1,20 +1,12 @@
-import {
-  Text,
-  StyleSheet,
-  View,
-  Image,
-  Button,
-  TextInput,
-} from 'react-native';
+import { Text, StyleSheet, View, Image } from 'react-native';
 import React from 'react';
 
-import { colors } from '../../utility/colors';
 import { fonts } from '../../utility/fonts';
 
 export const DataBox = ({ data, icon, title, tintColor }) => {
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.icon_wrapper}>
         <Image
           style={styles.icon}
           tintColor={tintColor && tintColor}
@@ -32,7 +24,7 @@ export const DataBox = ({ data, icon, title, tintColor }) => {
 const styles = StyleSheet.create({
   container: {
     height: 100,
-    width: '40%',
+    width: '45%',
     margin: 10,
     backgroundColor: 'rgba(52, 52, 52, 0.8)',
     alignItems: 'center',
@@ -43,7 +35,11 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginRight: 10,
-    marginLeft: -10,
+  },
+  icon_wrapper: {
+    width: 50,
+    height: 50,
+    marginRight: 15,
   },
   header: {
     fontSize: 16,
