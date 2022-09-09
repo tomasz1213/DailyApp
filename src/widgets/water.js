@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  View,
   StyleSheet,
   Text,
   Image,
@@ -21,12 +20,12 @@ export const Water = ({ navigation }) => {
   const { needDrink } = useSelector(USER_SELECTORS.getUserData);
   const dispatch = useDispatch();
   const [bottlePercent, setBottlePercent] = useState(0);
-  let bottlePercentHeight = useRef(new Animated.Value(70)).current;
+  const bottlePercentHeight = useRef(new Animated.Value(70)).current;
   const calculatePercentage = (waterDrink / needDrink) * 100;
 
   useEffect(() => {
     setBottlePercent(calculatePercentage.toFixed(0));
-  });
+  }, [calculatePercentage]);
 
   useEffect(() => {
     Animated.timing(bottlePercentHeight, {

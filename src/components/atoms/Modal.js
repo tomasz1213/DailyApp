@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     zIndex: 99,
     alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    top: 0,
   },
   modal: {
     opacity: 1,

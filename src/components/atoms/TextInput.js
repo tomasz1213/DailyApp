@@ -1,14 +1,14 @@
-import { Text, StyleSheet, View, TextInput } from 'react-native';
+import { Text, StyleSheet, View, TextInput as Input } from 'react-native';
 import React from 'react';
 
 import { colors } from '../../utility/colors';
 import { fonts } from '../../utility/fonts';
 
-export const TextInputModal = ({ handleInputChange, inputValue, label }) => {
+export const TextInput = ({ handleInputChange, inputValue, label }) => {
   return (
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
-      <TextInput
+      <Input
         onChangeText={handleInputChange}
         style={styles.textInput}
         value={inputValue}

@@ -5,7 +5,7 @@ import GetLocation from 'react-native-get-location';
 
 import { fetchData } from '../../utility/api';
 import { TitledItem } from '../organism/TitledItem';
-import { TextInputModal } from '../atoms/TextInput';
+import { TextInput } from '../atoms/TextInput';
 import { Modal } from '../atoms/Modal';
 import {
   setUserLocation,
@@ -79,7 +79,7 @@ export const LocationSetting = () => {
         <Modal
           onClickAccept={handleAcceptButton}
           onClickCancel={handleShowInput}>
-          <TextInputModal
+          <TextInput
             handleInputChange={setInputValue}
             inputValue={inputValue}
           />

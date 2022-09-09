@@ -1,9 +1,15 @@
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Modal as AnotherModal,
+} from 'react-native';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Modal } from '../atoms/Modal';
-import { TextInputModal } from '../atoms/TextInput';
+import { TextInput } from '../atoms/TextInput';
 
 import { apiRequest } from '../../helpers/api';
 import { fonts } from '../../utility/fonts';
@@ -49,60 +55,70 @@ export const AuthButtons = () => {
     if (isRegister) {
       const { login, password, email, name } = registerFrom;
       return (
-        <Modal
-          onClickCancel={() => setIsModalOpen(false)}
-          onClickAccept={() => handleSubmitForm(isModalRegister)}>
-          <TextInputModal
-            handleInputChange={value =>
-              setRegisterFrom({ ...registerFrom, login: value })
-            }
-            label="Login"
-            value={login}
-          />
-          <TextInputModal
-            handleInputChange={value =>
-              setRegisterFrom({ ...registerFrom, password: value })
-            }
-            label="Password"
-            value={password}
-          />
-          <TextInputModal
-            handleInputChange={value =>
-              setRegisterFrom({ ...registerFrom, email: value })
-            }
-            label="Email"
-            value={email}
-          />
-          <TextInputModal
-            handleInputChange={value =>
-              setRegisterFrom({ ...registerFrom, name: value })
-            }
-            label="Name"
-            value={name}
-          />
-        </Modal>
+        <AnotherModal
+          animationType="slide"
+          transparent={true}
+          visible={isModalOpen}>
+          <Modal
+            onClickCancel={() => setIsModalOpen(false)}
+            onClickAccept={() => handleSubmitForm(isModalRegister)}>
+            <TextInput
+              handleInputChange={value =>
+                setRegisterFrom({ ...registerFrom, login: value })
+              }
+              label="Login"
+              value={login}
+            />
+            <TextInput
+              handleInputChange={value =>
+                setRegisterFrom({ ...registerFrom, password: value })
+              }
+              label="Password"
+              value={password}
+            />
+            <TextInput
+              handleInputChange={value =>
+                setRegisterFrom({ ...registerFrom, email: value })
+              }
+              label="Email"
+              value={email}
+            />
+            <TextInput
+              handleInputChange={value =>
+                setRegisterFrom({ ...registerFrom, name: value })
+              }
+              label="Name"
+              value={name}
+            />
+          </Modal>
+        </AnotherModal>
       );
     }
     const { login, password } = loginFrom;
     return (
-      <Modal
-        onClickCancel={() => setIsModalOpen(false)}
-        onClickAccept={() => handleSubmitForm(isModalRegister)}>
-        <TextInputModal
-          handleInputChange={value =>
-            setLoginFrom({ ...loginFrom, login: value })
-          }
-          label="Login"
-          value={login}
-        />
-        <TextInputModal
-          handleInputChange={value =>
-            setLoginFrom({ ...loginFrom, password: value })
-          }
-          label="Password"
-          value={password}
-        />
-      </Modal>
+      <AnotherModal
+        animationType="slide"
+        transparent={true}
+        visible={isModalOpen}>
+        <Modal
+          onClickCancel={() => setIsModalOpen(false)}
+          onClickAccept={() => handleSubmitForm(isModalRegister)}>
+          <TextInput
+            handleInputChange={value =>
+              setLoginFrom({ ...loginFrom, login: value })
+            }
+            label="Login"
+            value={login}
+          />
+          <TextInput
+            handleInputChange={value =>
+              setLoginFrom({ ...loginFrom, password: value })
+            }
+            label="Password"
+            value={password}
+          />
+        </Modal>
+      </AnotherModal>
     );
   };
 

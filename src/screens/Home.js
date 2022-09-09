@@ -21,7 +21,7 @@ export const Home = props => {
           <Water {...props} />
           <Todo {...props} />
           <Steps {...props} />
-          <Sleep {...props} />
+          {/* <Sleep {...props} /> */}
         </ScrollView>
       </SafeAreaView>
     </>

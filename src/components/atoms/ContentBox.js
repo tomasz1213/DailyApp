@@ -3,15 +3,14 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Button,
-  TextInput,
+  TextInput as Input,
 } from 'react-native';
 import React from 'react';
 
 import { colors } from '../../utility/colors';
 import { fonts } from '../../utility/fonts';
 
-export const TextInputModal = ({
+export const TextInput = ({
   onClickAccept,
   onClickCancel,
   handleInputChange,
@@ -20,7 +19,7 @@ export const TextInputModal = ({
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
-        <TextInput
+        <Input
           onChangeText={handleInputChange}
           style={styles.textInput}
           value={inputValue}
