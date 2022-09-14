@@ -40,7 +40,7 @@ export const Water = ({ navigation }) => {
     if (bottlePercent >= 110) {
       return;
     }
-    dispatch(setWaterData({ waterDrink: waterAllReadyDrunk }));
+    dispatch(setWaterData(waterAllReadyDrunk));
     setBottlePercent(calculatePercentage.toFixed(0));
     Animated.timing(bottlePercentHeight, {
       toValue: -bottlePercent + 70,

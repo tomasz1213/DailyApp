@@ -34,7 +34,7 @@ export const Weather = ({ navigation }) => {
     cloud_area_fraction,
     wind_speed,
     wind_from_direction,
-  } = weatherData.current;
+  } = weatherData?.current;
 
   useEffect(() => {
     setWeatherIcon(`http://192.168.8.168:5000/upload/weather/${imageData}.png`);
@@ -98,7 +98,7 @@ export const Weather = ({ navigation }) => {
               />
               <DataBox
                 title="Pressure"
-                data={`${weatherData?.next_hour?.data.instant.details.air_pressure_at_sea_level} hPa`}
+                data={`${weatherData?.next_hour?.data?.instant?.details.air_pressure_at_sea_level} hPa`}
                 icon={atmospheric_pressure_icon}
                 tintColor="white"
               />
@@ -109,7 +109,7 @@ export const Weather = ({ navigation }) => {
               />
               <DataBox
                 title="Pressure"
-                data={`${weatherData?.next_hour?.data.instant.details.air_pressure_at_sea_level} hPa`}
+                data={`${weatherData?.next_hour?.data?.instant?.details.air_pressure_at_sea_level} hPa`}
                 icon={atmospheric_pressure_icon}
                 tintColor="white"
               />

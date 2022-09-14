@@ -3,7 +3,10 @@ import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { WATER_SELECTORS } from '../../store/selectors/water';
-import { setWaterData } from '../../store/reducer/water';
+import {
+  setWaterData,
+  setGlassSize as setReducerGlassSize,
+} from '../../store/reducer/water';
 
 import { CustomButton } from '../atoms/CustomButton';
 import { Modal as AnotherModal } from '../atoms/Modal';
@@ -25,12 +28,18 @@ export const CustomSizeButtons = () => {
   const { waterDrink } = useSelector(WATER_SELECTORS.getWaterData);
 
   const handleGlassClick = glassSize => {
+    setShowModal(false);
     setShowButtons(true);
     setGlassSize(glassSize);
   };
   const onClickDrink = () => {
     const waterAllReadyDrunk = waterDrink + glassSize;
-    dispatch(setWaterData({ waterDrink: waterAllReadyDrunk }));
+    dispatch(setWaterData(waterAllReadyDrunk));
+    setShowButtons(false);
+  };
+  const onClickDefault = () => {
+    dispatch(setReducerGlassSize(glassSize));
+    setShowButtons(false);
   };
   return (
     <>
@@ -40,8 +49,17 @@ export const CustomSizeButtons = () => {
           transparent={true}
           visible={showModal}
           onRequestClose={() => setShowModal(!showModal)}>
-          <AnotherModal onClickCancel={() => setShowModal(!showModal)}>
-            <TextInput />
+          <AnotherModal
+            onClickCancel={() => setShowModal(!showModal)}
+            onClickAccept={() => {
+              setShowModal(false);
+              setShowButtons(true);
+            }}>
+            <TextInput
+              handleInputChange={data => setGlassSize(+data)}
+              inputValue={glassSize}
+              label="Type custom glass size"
+            />
           </AnotherModal>
         </Modal>
       )}
@@ -87,6 +105,7 @@ export const CustomSizeButtons = () => {
             onPress={() => setShowButtons(false)}>
             <CustomButton
               style={styles.button}
+              onClick={onClickDefault}
               text="Save as Default"
               textStyle={{
                 color: 'white',

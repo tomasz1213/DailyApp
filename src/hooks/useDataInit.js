@@ -97,12 +97,12 @@ export const useDataInit = () => {
       ).then(({ data }) => {
         dispatch(
           setCurrentWeatherData(
-            data.properties.timeseries[0].data.instant.details,
+            data?.data.instant.details,
           ),
         );
         dispatch(
           setPrecipitationData(
-            data.properties.timeseries[0].data.next_1_hours.details
+            data?.properties?.timeseries[0]?.data.next_1_hours.details
               .precipitation_amount,
           ),
         );
