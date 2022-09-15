@@ -3,6 +3,7 @@ import { createAction, createReducer } from '@reduxjs/toolkit';
 export const setWaterData = createAction('SET_WATER_DATA');
 export const setLastReset = createAction('SET_LAST_RESET');
 export const setGlassSize = createAction('SET_GLASS_SIZE');
+export const setWaterHistory = createAction('SET_WATER_HISTORY');
 export const clearWaterData = createAction('CLEAR_WATER_DATA');
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
     glassSize: 250,
     waterDrink: 0,
   },
+  history: [],
   lastReset: '',
 };
 
@@ -20,6 +22,9 @@ export const waterReducer = createReducer(initialState, builder => {
     })
     .addCase(setGlassSize, (state, action) => {
       state.data.glassSize = action?.payload;
+    })
+    .addCase(setWaterHistory, (state, action) => {
+      state.history = action?.payload;
     })
     .addCase(setLastReset, (state, action) => {
       state.lastReset = action.payload;

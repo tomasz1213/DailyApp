@@ -6,6 +6,7 @@ import * as Progress from 'react-native-progress';
 import { WATER_SELECTORS } from '../store/selectors/water';
 import { USER_SELECTORS } from '../store/selectors/user';
 import { BackButton } from '../components/atoms/BackButton';
+import { WaterStaticsBox } from '../components/organism/WaterStaticsBox';
 
 import { CustomSizeButtons } from '../components/organism/CupSizeButtons';
 
@@ -44,9 +45,13 @@ export const Water = ({ navigation }) => {
             color="#A5D9D9"
             borderWidth={2}
           />
+          <Text style={styles.text_high}>
+            {waterDrink} of {needDrink}ml
+          </Text>
           <View style={styles.info_box}>
             <CustomSizeButtons />
           </View>
+          <WaterStaticsBox />
         </View>
       </ScrollView>
     </View>
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '25%',
+    height: 200,
     width: '100%',
   },
   main: {
@@ -81,30 +86,10 @@ const styles = StyleSheet.create({
   },
   text_high: {
     textAlign: 'center',
-    color: colors.white,
-    fontSize: 16,
+    color: '#A5D9D9',
+    fontSize: 20,
     fontFamily: fonts.ibm_medium,
-  },
-  text_temp: {
-    textAlign: 'center',
-    color: colors.white,
-    fontSize: 46,
-    fontFamily: fonts.ibm_light,
-  },
-  icon: {
-    width: 16,
-    height: 16,
-    marginRight: 2,
-  },
-  weather_icon: {
-    width: 100,
-    height: 100,
-  },
-  location: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    marginTop: 20,
   },
   info_box: {
     marginTop: 30,

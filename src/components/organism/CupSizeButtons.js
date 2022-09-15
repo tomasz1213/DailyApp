@@ -12,13 +12,10 @@ import { CustomButton } from '../atoms/CustomButton';
 import { Modal as AnotherModal } from '../atoms/Modal';
 import { TextInput } from '../atoms/TextInput';
 
-import cup_icon from '../../assets/icons/cup.png';
-import bottle_icon from '../../assets/icons/bottle.png';
-import plastic_cup_icon from '../../assets/icons/plastic-cup.png';
-import tea_cup_icon from '../../assets/icons/tea-cup.png';
 import settings_icon from '../../assets/icons/settings.png';
 
 import { colors } from '../../utility/colors';
+import { cupConfig } from '../../helpers/cupConfig';
 
 export const CustomSizeButtons = () => {
   const dispatch = useDispatch();
@@ -41,6 +38,7 @@ export const CustomSizeButtons = () => {
     dispatch(setReducerGlassSize(glassSize));
     setShowButtons(false);
   };
+
   return (
     <>
       {showModal && (
@@ -63,31 +61,18 @@ export const CustomSizeButtons = () => {
           </AnotherModal>
         </Modal>
       )}
-      <CustomButton
-        onClick={() => handleGlassClick(500)}
-        text={'500 ml'}
-        style={{ backgroundColor: '#F1F5DC', ...styles.drinkButtonContainer }}
-        image={bottle_icon}
-      />
-      <CustomButton
-        onClick={() => handleGlassClick(180)}
-        text={'180 ml'}
-        image={cup_icon}
-        style={{ backgroundColor: '#DED0F2', ...styles.drinkButtonContainer }}
-        tintColor={colors.blue.light}
-      />
-      <CustomButton
-        onClick={() => handleGlassClick(200)}
-        text={'200 ml'}
-        style={{ backgroundColor: '#DEE6FC', ...styles.drinkButtonContainer }}
-        image={plastic_cup_icon}
-      />
-      <CustomButton
-        onClick={() => handleGlassClick(300)}
-        text={'300 ml'}
-        image={tea_cup_icon}
-        style={{ backgroundColor: '#D4F2D0', ...styles.drinkButtonContainer }}
-      />
+      {cupConfig.map(({ value, label, icon, backgroundColor }) => (
+        <CustomButton
+          key={value}
+          onClick={() => handleGlassClick(value)}
+          text={label}
+          style={{
+            backgroundColor: backgroundColor,
+            ...styles.drinkButtonContainer,
+          }}
+          image={icon}
+        />
+      ))}
       <CustomButton
         onClick={() => setShowModal(true)}
         text={'Custom'}
