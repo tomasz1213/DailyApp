@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
-    fontSize: 16,
+    fontSize: 22,
     fontFamily: fonts.ibm_regular,
   },
   icon: {
-    width: 15,
-    height: 15,
+    width: 25,
+    height: 25,
     marginRight: 5,
   },
   timeWrapper: {

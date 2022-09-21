@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
+import useAuth from '../../hooks/useAuth';
 import { WATER_SELECTORS } from '../../store/selectors/water';
 import {
   setWaterData,
   setGlassSize as setReducerGlassSize,
+  setWaterHistory,
 } from '../../store/reducer/water';
 
 import { CustomButton } from '../atoms/CustomButton';
@@ -23,6 +25,7 @@ export const CustomSizeButtons = () => {
   const [showButtons, setShowButtons] = useState(false);
   const [glassSize, setGlassSize] = useState('');
   const { waterDrink } = useSelector(WATER_SELECTORS.getWaterData);
+  const { isAuthenticated } = useAuth();
 
   const handleGlassClick = glassSize => {
     setShowModal(false);
@@ -30,8 +33,11 @@ export const CustomSizeButtons = () => {
     setGlassSize(glassSize);
   };
   const onClickDrink = () => {
+    const today = new Date();
+    const time = today.getHours() + ':' + today.getMinutes();
     const waterAllReadyDrunk = waterDrink + glassSize;
     dispatch(setWaterData(waterAllReadyDrunk));
+    dispatch(setWaterHistory({ value: glassSize, time: time }));
     setShowButtons(false);
   };
   const onClickDefault = () => {

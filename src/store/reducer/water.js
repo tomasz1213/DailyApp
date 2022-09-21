@@ -8,7 +8,7 @@ export const clearWaterData = createAction('CLEAR_WATER_DATA');
 
 const initialState = {
   data: {
-    glassSize: 250,
+    glassSize: 200,
     waterDrink: 0,
   },
   history: [],
@@ -24,7 +24,7 @@ export const waterReducer = createReducer(initialState, builder => {
       state.data.glassSize = action?.payload;
     })
     .addCase(setWaterHistory, (state, action) => {
-      state.history = action?.payload;
+      state.history.push(action?.payload);
     })
     .addCase(setLastReset, (state, action) => {
       state.lastReset = action.payload;

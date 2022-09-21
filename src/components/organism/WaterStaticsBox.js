@@ -4,15 +4,19 @@ import { useSelector } from 'react-redux';
 
 import { WaterHistoryItem } from '../atoms/WaterHistoryItem';
 
+import { cupConfig } from '../../helpers/cupConfig';
 import { WATER_SELECTORS } from '../../store/selectors/water';
 
-import { colors } from '../../utility/colors';
-
 export const WaterStaticsBox = () => {
+  const waterHistory = useSelector(WATER_SELECTORS.getWaterHistory);
   return (
     <View style={styles.boxWrapper}>
-      <WaterHistoryItem time={'11:22'} amount={100} />
-      <WaterHistoryItem time={'11:22'} amount={100} />
+      {waterHistory?.map(({ value, time }) => {
+        const image = cupConfig.find((el) => el.value === value);
+        return (
+          <WaterHistoryItem time={time} amount={value} image={image?.icon} />
+        );
+      })}
     </View>
   );
 };

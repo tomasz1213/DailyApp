@@ -9,7 +9,6 @@ export const setPrecipitationData = createAction('SET_PRECIPITATION_DATA');
 export const clearData = createAction('CLEAR_DATA');
 
 const initialState = {
-  isAuthenticated: false,
   data: {
     current: {},
     next_hour: {},

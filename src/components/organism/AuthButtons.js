@@ -6,20 +6,20 @@ import {
   Modal as AnotherModal,
 } from 'react-native';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Modal } from '../atoms/Modal';
 import { TextInput } from '../atoms/TextInput';
 
 import { apiRequest } from '../../helpers/api';
+import useAuth from '../../hooks/useAuth';
 import { fonts } from '../../utility/fonts';
 import { colors } from '../../utility/colors';
-import { USER_SELECTORS } from '../../store/selectors/user';
 import { registerUser, setIsAuthenticated } from '../../store/reducer/user';
 
 export const AuthButtons = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector(USER_SELECTORS.getUserData);
+  const { isAuthenticated } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalRegister, setIsModalRegister] = useState(false);
   const [loginFrom, setLoginFrom] = useState({ login: '', password: '' });

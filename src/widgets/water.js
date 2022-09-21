@@ -9,7 +9,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { WATER_SELECTORS } from '../store/selectors/water';
 import { USER_SELECTORS } from '../store/selectors/user';
-import { setWaterData } from '../store/reducer/water';
+import { setWaterData, setWaterHistory } from '../store/reducer/water';
 import Glass from '../assets/icons/glasss.png';
 import { fonts } from '../utility/fonts';
 import { colors } from '../utility/colors';
@@ -36,11 +36,13 @@ export const Water = ({ navigation }) => {
 
   const handleGlassClick = () => {
     const waterAllReadyDrunk = waterDrink + glassSize;
-
+    const today = new Date();
+    const time = today.getHours() + ':' + today.getMinutes();
     if (bottlePercent >= 110) {
       return;
     }
     dispatch(setWaterData(waterAllReadyDrunk));
+    dispatch(setWaterHistory({ value: glassSize, time: time }));
     setBottlePercent(calculatePercentage.toFixed(0));
     Animated.timing(bottlePercentHeight, {
       toValue: -bottlePercent + 70,
