@@ -92,21 +92,11 @@ export const CustomSizeButtons = () => {
               style={styles.button}
               onClick={onClickDefault}
               text="Save as Default"
-              textStyle={{
-                color: 'white',
-                borderColor: colors.purple.light,
-                borderBottomWidth: 2,
-              }}
             />
             <CustomButton
               style={styles.button}
               text="Drink"
               onClick={onClickDrink}
-              textStyle={{
-                color: 'white',
-                borderColor: colors.purple.light,
-                borderBottomWidth: 2,
-              }}
             />
           </TouchableOpacity>
         </Modal>
@@ -121,14 +111,20 @@ const styles = StyleSheet.create({
     height: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'flex-end',
   },
   button: {
-    width: '40%',
-    height: 35,
+    flexDirection: 'row',
     alignItems: 'center',
-    color: 'white',
+    justifyContent: 'space-around',
+    marginHorizontal: 20,
+    marginTop: 20,
+    width: '40%',
+    borderRadius: 25,
+    minHeight: 50,
+    backgroundColor: '#DED0F2',
+    color: 'black',
   },
   drinkButtonContainer: {
     flexDirection: 'row',

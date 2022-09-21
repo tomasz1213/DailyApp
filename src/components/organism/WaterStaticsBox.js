@@ -11,8 +11,8 @@ import { colors } from '../../utility/colors';
 export const WaterStaticsBox = () => {
   return (
     <View style={styles.boxWrapper}>
-      <WaterHistoryItem />
-      <WaterHistoryItem />
+      <WaterHistoryItem time={'11:22'} amount={100} />
+      <WaterHistoryItem time={'11:22'} amount={100} />
     </View>
   );
 };
