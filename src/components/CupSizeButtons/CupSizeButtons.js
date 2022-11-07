@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
-import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import useAuth from '../../hooks/useAuth';
-import { WATER_SELECTORS } from '../../store/selectors/water';
+import useAuth from 'hooks/useAuth';
+import { WATER_SELECTORS } from 'store/selectors/water';
 import {
   setWaterData,
   setGlassSize as setReducerGlassSize,
   setWaterHistory,
-} from '../../store/reducer/water';
+} from 'store/reducer/water';
 
-import { CustomButton } from '../atoms/CustomButton';
-import { Modal as AnotherModal } from '../atoms/Modal';
-import { TextInput } from '../atoms/TextInput';
+import { CustomButton } from 'components/CustomButton/CustomButton';
+import { Modal as AnotherModal } from 'components/Modal/Modal';
+import { TextInput } from 'components/TextInput/TextInput';
 
-import settings_icon from '../../assets/icons/settings.png';
+import settings_icon from 'assets/icons/settings.png';
 
-import { colors } from '../../utility/colors';
-import { cupConfig } from '../../helpers/cupConfig';
+import { cupConfig } from 'helpers/cupConfig';
 
 export const CustomSizeButtons = () => {
   const dispatch = useDispatch();

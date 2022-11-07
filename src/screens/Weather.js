@@ -1,27 +1,20 @@
-import {
-  Text,
-  StyleSheet,
-  View,
-  Image,
-  ScrollView,
-  SafeAreaView,
-} from 'react-native';
+import { Text, StyleSheet, View, Image, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { WEATHER_SELECTORS } from '../store/selectors/weather';
-import { BackButton } from '../components/atoms/BackButton';
-import { DataBox } from '../components/atoms/DataBox';
+import { WEATHER_SELECTORS } from 'store/selectors/weather';
+import { BackButton } from 'components/BackButton/BackButton';
+import { DataBox } from 'components/DataBox/DataBox';
 
-import { fonts } from '../utility/fonts';
-import { colors } from '../utility/colors';
-import location_icon from '../assets/icons/location.png';
-import humidity_icon from '../assets/icons/Humidity_icon.png';
-import clouds_icon from '../assets/icons/clouds.png';
-import wind_icon from '../assets/icons/wind.png';
-import rain_icon from '../assets/icons/rain.png';
-import atmospheric_pressure_icon from '../assets/icons/atmospheric-pressure.png';
-import compass from '../assets/icons/compass.png';
+import { fonts } from 'utils/fonts';
+import { colors } from 'utils/colors';
+import location_icon from 'assets/icons/location.png';
+import humidity_icon from 'assets/icons/Humidity_icon.png';
+import clouds_icon from 'assets/icons/clouds.png';
+import wind_icon from 'assets/icons/wind.png';
+import rain_icon from 'assets/icons/rain.png';
+import atmospheric_pressure_icon from 'assets/icons/atmospheric-pressure.png';
+import compass from 'assets/icons/compass.png';
 
 export const Weather = ({ navigation }) => {
   const weatherData = useSelector(WEATHER_SELECTORS.getWeatherData);

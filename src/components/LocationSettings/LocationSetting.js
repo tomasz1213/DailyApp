@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import GetLocation from 'react-native-get-location';
 
-import { fetchData } from '../../utility/api';
-import { TitledItem } from '../organism/TitledItem';
-import { TextInput } from '../atoms/TextInput';
-import { Modal } from '../atoms/Modal';
+import { fetchData } from 'utils/api';
+import { TitledItem } from 'components/TiltedItem/TitledItem';
+import { TextInput } from 'components/TextInput/TextInput';
+import { Modal } from 'components/Modal/Modal';
 import {
   setUserLocation,
   setUserGpsLocation,
   setIsGpsOn,
-} from '../../store/reducer/user';
-import { USER_SELECTORS } from '../../store/selectors/user';
+} from 'store/reducer/user';
+import { USER_SELECTORS } from 'store/selectors/user';
 
 export const LocationSetting = () => {
   const [showInput, setShowInput] = useState(false);

@@ -1,8 +1,8 @@
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 
-import { colors } from '../../utility/colors';
-import { fonts } from '../../utility/fonts';
+import { colors } from 'utils/colors';
+import { fonts } from 'utils/fonts';
 
 export const Modal = ({ onClickAccept, onClickCancel, children }) => {
   return (

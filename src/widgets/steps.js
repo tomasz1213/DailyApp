@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
-import { BarChart } from 'react-native-chart-kit';
-import { fonts } from '../utility/fonts';
-import { colors } from '../utility/colors';
+import React from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
-import { FIT_SELECTORS } from '../store/selectors/fitness';
+import { BarChart } from 'react-native-chart-kit';
+import { colors } from 'utils/colors';
+import { FIT_SELECTORS } from 'store/selectors/fitness';
 
 export const Steps = ({ navigation }) => {
   const stepsData = useSelector(FIT_SELECTORS.getStepsData);

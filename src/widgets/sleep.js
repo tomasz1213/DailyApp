@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-  Image,
-} from 'react-native';
-import { colors } from '../utility/colors';
-import musicalIcon from '../assets/icons/musical-note.png';
-import noteIcon from '../assets/icons/note.png';
-import { fonts } from '../utility/fonts';
+import React from 'react';
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { colors } from 'utils/colors';
+import { fonts } from 'utils/fonts';
+import musicalIcon from 'assets/icons/musical-note.png';
+import noteIcon from 'assets/icons/note.png';
 
 export const Sleep = ({ navigation }) => {
   return (

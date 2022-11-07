@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { store } from '../store/reducer/root';
+import { store } from 'store/reducer/root';
 
 const instance = axios.create({
-  baseURL: 'http://192.168.8.100:5000/api/',
+  baseURL: 'http://192.168.8.168:5000/api/',
   withCredentials: false,
 });
 instance.interceptors.request.use(function (config) {

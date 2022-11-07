@@ -1,7 +1,7 @@
-import cup_icon from '../assets/icons/cup.png';
-import bottle_icon from '../assets/icons/bottle.png';
-import plastic_cup_icon from '../assets/icons/plastic-cup.png';
-import tea_cup_icon from '../assets/icons/tea-cup.png';
+import cup_icon from 'assets/icons/cup.png';
+import bottle_icon from 'assets/icons/bottle.png';
+import plastic_cup_icon from 'assets/icons/plastic-cup.png';
+import tea_cup_icon from 'assets/icons/tea-cup.png';
 
 export const cupConfig = [
   {

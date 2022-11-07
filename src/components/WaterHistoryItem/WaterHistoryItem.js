@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
-import tea_cup_icon from '../../assets/icons/tea-cup.png';
-import { fonts } from '../../utility/fonts';
-import { colors } from '../../utility/colors';
+import { fonts } from 'utils/fonts';
+import { colors } from 'utils/colors';
 
 export const WaterHistoryItem = ({ time, amount, image }) => {
   return (

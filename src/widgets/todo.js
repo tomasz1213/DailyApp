@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-
 import { useSelector, useDispatch } from 'react-redux';
-import { setTodoDone } from '../store/reducer/todo';
-import { TODO_SELECTORS } from '../store/selectors/todo';
 
-import { fonts } from '../utility/fonts';
-import { colors } from '../utility/colors';
+import { setTodoDone } from 'store/reducer/todo';
+import { TODO_SELECTORS } from 'store/selectors/todo';
+
+import { fonts } from 'utils/fonts';
+import { colors } from 'utils/colors';
 
 export const Todo = ({ navigation }) => {
   const { todo } = useSelector(TODO_SELECTORS.getToDo);

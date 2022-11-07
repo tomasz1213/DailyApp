@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { WaterHistoryItem } from '../atoms/WaterHistoryItem';
+import { WaterHistoryItem } from 'components/WaterHistoryItem/WaterHistoryItem';
 
-import { cupConfig } from '../../helpers/cupConfig';
-import { WATER_SELECTORS } from '../../store/selectors/water';
+import { cupConfig } from 'helpers/cupConfig';
+import { WATER_SELECTORS } from 'store/selectors/water';
 
 export const WaterStaticsBox = () => {
   const waterHistory = useSelector(WATER_SELECTORS.getWaterHistory);
   return (
     <View style={styles.boxWrapper}>
       {waterHistory?.map(({ value, time }) => {
-        const image = cupConfig.find((el) => el.value === value);
+        const image = cupConfig.find(el => el.value === value);
         return (
           <WaterHistoryItem time={time} amount={value} image={image?.icon} />
         );

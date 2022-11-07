@@ -1,13 +1,13 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 
-import { Weather } from '../widgets/weather';
-import { Water } from '../widgets/water';
-import { Todo } from '../widgets/todo';
-import { Steps } from '../widgets/steps';
-import { Sleep } from '../widgets/sleep';
+import { Weather } from 'widgets/weather';
+import { Water } from 'widgets/water';
+import { Todo } from 'widgets/todo';
+import { Steps } from 'widgets/steps';
+import { Sleep } from 'widgets/sleep';
 
-import { SettingButton } from '../components/atoms/SettingButton';
+import { SettingButton } from '../components/components/SettingButton';
 import { useDataInit } from '../hooks/useDataInit';
 
 export const Home = props => {

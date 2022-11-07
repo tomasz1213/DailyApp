@@ -1,18 +1,12 @@
-import {
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
-import { fonts } from '../../utility/fonts';
-import { colors } from '../../utility/colors';
-import settingIcon from '../../assets/icons/settings.png';
-import circleIcon from '../../assets/icons/circle.png';
-import onIcon from '../../assets/icons/on.png';
-import offIcon from '../../assets/icons/off.png';
+import { fonts } from 'utils/fonts';
+import { colors } from 'utils/colors';
+import settingIcon from 'assets/icons/settings.png';
+import circleIcon from 'assets/icons/circle.png';
+import onIcon from 'assets/icons/on.png';
+import offIcon from 'assets/icons/off.png';
 
 export const TitledItem = ({ title, desc, onClick, icon, isOn }) => {
   const [iconData, setIconData] = useState();

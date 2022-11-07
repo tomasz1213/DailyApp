@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as Progress from 'react-native-progress';
 
-import { WATER_SELECTORS } from '../store/selectors/water';
-import { USER_SELECTORS } from '../store/selectors/user';
-import { BackButton } from '../components/atoms/BackButton';
-import { WaterStaticsBox } from '../components/organism/WaterStaticsBox';
+import { WATER_SELECTORS } from 'store/selectors/water';
+import { USER_SELECTORS } from 'store/selectors/user';
+import { BackButton } from 'components/BackButton/BackButton';
+import { WaterStaticsBox } from 'components/WaterStaticsBox/WaterStaticsBox';
 
-import { CustomSizeButtons } from '../components/organism/CupSizeButtons';
+import { CustomSizeButtons } from 'components/CupSizeButtons/CupSizeButtons';
 
-import { fonts } from '../utility/fonts';
-import { colors } from '../utility/colors';
+import { fonts } from 'utils/fonts';
+import { colors } from 'utils/colors';
 
 export const Water = ({ navigation }) => {
   const { waterDrink } = useSelector(WATER_SELECTORS.getWaterData);

@@ -1,12 +1,12 @@
 import { Text, StyleSheet, View, ScrollView } from 'react-native';
 import React from 'react';
 
-import { LocationSetting } from '../components/organism/LocationSetting';
-import { AuthButtons } from '../components/organism/AuthButtons';
-import { BackButton } from '../components/atoms/BackButton';
+import { LocationSetting } from 'components/LocationSetting/LocationSetting';
+import { AuthButtons } from 'components/AuthButtons/AuthButtons';
+import { BackButton } from 'components/BackButton/BackButton';
 
-import { fonts } from '../utility/fonts';
-import { colors } from '../utility/colors';
+import { fonts } from 'utils/fonts';
+import { colors } from 'utils/colors';
 
 export const ConfigScreen = ({ navigation }) => {
   return (

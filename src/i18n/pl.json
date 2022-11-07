@@ -1,0 +1,16 @@
+{
+  "common": {
+    "hi": {
+      "mom": "Cześć mamo! 🙋‍♂️"
+    },
+    "logout": {
+      "button": "Wyloguj",
+      "message": {
+        "success": "Pomyślnie wylogowano!"
+      }
+    },
+    "login": {
+      "button": "Zaloguj"
+    }
+  }
+}

@@ -8,22 +8,22 @@ import {
   setHourWeatherData,
   setSunAndMoonData,
   setLocationName,
-} from '../store/reducer/weather';
+} from 'store/reducer/weather';
 import {
   setSleepData,
   setStepsData,
   setCaloriesData,
   setDistanceData,
-} from '../store/reducer/fitness';
-import { setLastReset, clearWaterData } from '../store/reducer/water';
-import { WATER_SELECTORS } from '../store/selectors/water';
-import { USER_SELECTORS } from '../store/selectors/user';
+} from 'store/reducer/fitness';
+import { setLastReset, clearWaterData } from 'store/reducer/water';
+import { WATER_SELECTORS } from 'store/selectors/water';
+import { USER_SELECTORS } from 'store/selectors/user';
 
-import { fetchData } from '../utility/api';
-import { permissions, requestPermission } from '../utility/permissions';
-import { returnHourOffset } from '../utility/countHourOffset';
-import { apiRequest } from '../helpers/api';
-import { setIsAuthenticated } from '../store/reducer/user';
+import { fetchData } from 'utils/api';
+import { permissions, requestPermission } from 'utils/permissions';
+import { returnHourOffset } from 'utils/countHourOffset';
+import { apiRequest } from 'helpers/api';
+import { setIsAuthenticated } from 'store/reducer/user';
 // import {Buffer} from 'buffer';
 // import LiveAudioStream from 'react-native-live-audio-stream';
 
@@ -95,11 +95,7 @@ export const useDataInit = () => {
       fetchData(
         `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${userData.location.lat}&lon=${userData.location.lon}`,
       ).then(({ data }) => {
-        dispatch(
-          setCurrentWeatherData(
-            data?.data.instant.details,
-          ),
-        );
+        dispatch(setCurrentWeatherData(data?.data.instant.details));
         dispatch(
           setPrecipitationData(
             data?.properties?.timeseries[0]?.data.next_1_hours.details

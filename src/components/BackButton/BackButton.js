@@ -1,8 +1,8 @@
-import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 
-import { colors } from '../../utility/colors';
-import left from '../../assets/icons/left.png';
+import { colors } from 'utils/colors';
+import left from 'assets/icons/left.png';
 
 export const BackButton = navigation => {
   const handleBackNavigation = () => {

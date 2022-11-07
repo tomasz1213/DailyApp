@@ -8,14 +8,14 @@ import {
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Modal } from '../atoms/Modal';
-import { TextInput } from '../atoms/TextInput';
+import { Modal } from 'components/Modal/Modal';
+import { TextInput } from 'components/TextInput/TextInput';
 
-import { apiRequest } from '../../helpers/api';
-import useAuth from '../../hooks/useAuth';
-import { fonts } from '../../utility/fonts';
-import { colors } from '../../utility/colors';
-import { registerUser, setIsAuthenticated } from '../../store/reducer/user';
+import { apiRequest } from 'helpers/api';
+import useAuth from 'hooks/useAuth';
+import { fonts } from 'utils/fonts';
+import { colors } from 'utils/colors';
+import { registerUser, setIsAuthenticated } from 'store/reducer/user';
 
 export const AuthButtons = () => {
   const dispatch = useDispatch();

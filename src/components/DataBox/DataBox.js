@@ -1,15 +1,7 @@
-import {
-  Text,
-  StyleSheet,
-  View,
-  Image,
-  Button,
-  TextInput,
-} from 'react-native';
+import { Text, StyleSheet, View, Image } from 'react-native';
 import React from 'react';
 
-import { colors } from '../../utility/colors';
-import { fonts } from '../../utility/fonts';
+import { fonts } from 'utils/fonts';
 
 export const DataBox = ({ data, icon, title, tintColor }) => {
   return (

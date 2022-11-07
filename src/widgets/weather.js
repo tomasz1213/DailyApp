@@ -3,13 +3,13 @@ import styled from 'styled-components/native';
 import { View, StyleSheet, Text, Image, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
-import { WEATHER_SELECTORS } from '../store/selectors/weather';
-import { fonts } from '../utility/fonts';
-import { colors } from '../utility/colors';
-import { returnHourOffset } from '../utility/countHourOffset';
-import Sunrise from '../assets/icons/sunrise.png';
-import Sunset from '../assets/icons/sunset.png';
-import Umbrella from '../assets/icons/umbrella.png';
+
+import { WEATHER_SELECTORS } from 'store/selectors/weather';
+import { fonts } from 'utils/fonts';
+import { colors } from 'utils/colors';
+import Sunrise from 'assets/icons/sunrise.png';
+import Sunset from 'assets/icons/sunset.png';
+import Umbrella from 'assets/icons/umbrella.png';
 
 const defaultSize = Dimensions.get('window').height / 40 - 2;
 

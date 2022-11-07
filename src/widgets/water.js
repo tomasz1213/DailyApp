@@ -7,13 +7,14 @@ import {
   Animated,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { WATER_SELECTORS } from '../store/selectors/water';
-import { USER_SELECTORS } from '../store/selectors/user';
-import { setWaterData, setWaterHistory } from '../store/reducer/water';
-import Glass from '../assets/icons/glasss.png';
-import { fonts } from '../utility/fonts';
-import { colors } from '../utility/colors';
-import Bottle from '../assets/icons/human.png';
+
+import { WATER_SELECTORS } from 'store/selectors/water';
+import { USER_SELECTORS } from 'store/selectors/user';
+import { setWaterData, setWaterHistory } from 'store/reducer/water';
+import Bottle from 'assets/icons/human.png';
+import Glass from 'assets/icons/glasss.png';
+import { fonts } from 'utils/fonts';
+import { colors } from 'utils/colors';
 
 export const Water = ({ navigation }) => {
   const { glassSize, waterDrink } = useSelector(WATER_SELECTORS.getWaterData);
